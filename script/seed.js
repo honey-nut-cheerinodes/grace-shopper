@@ -1,18 +1,49 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Product} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
+  const products = [
+    {
+      name: 'Life Jacket',
+      price: 55,
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      imageUrl:
+        'https://ak9.picdn.net/shutterstock/videos/1037370149/thumb/1.jpg?ip=x480',
+      type: 'Dog'
+    },
+    {
+      name: 'Denim Jacket',
+      price: 110,
+      description:
+        'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      imageUrl:
+        'https://cdn.shopify.com/s/files/1/0470/2117/products/squarish_2_2048x.jpg?v=1566880912',
+      type: 'Dog'
+    }
+  ]
 
-  console.log(`seeded ${users.length} users`)
+  // Adding all dummy data products to the Product table in the cloak-n-dogger database
+  await Promise.all(
+    products.map(product => {
+      return Product.create(product)
+    })
+  )
+
+  console.log(`seeded ${products.length} products`)
+
+  // COMMENTING OUT FOR NOW. CAN BE UNCOMMENTED WHEN USER MODEL IS FINISHED
+  // const users = await Promise.all([
+  //   User.create({email: 'cody@email.com', password: '123'}),
+  //   User.create({email: 'murphy@email.com', password: '123'})
+  // ])
+  // console.log(`seeded ${users.length} users`)
+
   console.log(`seeded successfully`)
 }
 
