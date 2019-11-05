@@ -11,11 +11,11 @@ const Product = db.define('product', {
   },
   price: {
     type: Sequelize.INTEGER,
-    allowNull: false
-    // validate: {
-    //   isNumeric: true,
-    //   min: 0
-    // }
+    allowNull: false,
+    validate: {
+      isNumeric: true,
+      min: 0
+    }
   },
   description: {
     type: Sequelize.TEXT,
@@ -23,7 +23,6 @@ const Product = db.define('product', {
   },
   imageUrl: {
     type: Sequelize.STRING,
-    allowNull: false,
     defaultValue:
       'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?v=1530129081'
   },
