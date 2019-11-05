@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Work+Sans&display=swap');
+
 body {
-  font-family: sans-serif;
+  font-family: 'Work Sans', sans-serif;
 }
 
 a {
@@ -10,12 +12,113 @@ label {
   display: block;
 }
 
-nav a {
+/* nav a {
   display: inline-block;
   margin: 1em;
-}
+} */
 
 form div {
   margin: 1em;
   display: inline-block;
+}
+
+.home-page {
+  background-image: url('https://tucmag.net/wp-content/uploads/2018/11/FB-3.jpg');
+  height: 800px;
+  width: 101.25%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  margin: -10px;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+}
+
+.home-page h1 {
+  margin-top: 300px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 80px;
+}
+
+.home-page h2 {
+  margin-top: -50px;
+}
+
+.shop-btn {
+  margin-top: 15px;
+  padding: 15px 25px;
+  font-weight: bold;
+  letter-spacing: 0.17em;
+  background-color: white;
+  border: 1px solid white;
+  border-radius: 2px;
+}
+
+/* if i specify .home-page before, will it only apply to this? everything else will be diff? */
+.home-page #nav-bar {
+  display: flex;
+  width: 100%;
+  position: fixed;
+  justify-content: space-between;
+  padding-top: 35px;
+  height: 65px;
+  /* color: black; */
+}
+
+/* #nav-bar {
+  display: flex;
+  width: 100%;
+  position: fixed;
+  justify-content: space-between;
+  padding-top: 35px;
+  height: 65px;
+  color: white;
+} */
+
+#nav-logo {
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.nav-links {
+  padding: 0 75px;
+}
+
+.nav-links a {
+  padding: 0 10px;
+  color: white;
+}
+
+.shop-now {
+  margin: 75px 50px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.shop-now-component {
+  display: flex;
+  flex-direction: column;
+}
+
+.shop-now-img {
+  width: 375px;
+  height: 375px;
+  object-fit: cover;
+}
+
+img:hover {
+  opacity: 0.7;
+}
+
+.shop-now a {
+  margin: 10px;
+  font-weight: bold;
+  font-size: 20px;
+  color: black;
+}
+
+.shop-now p {
+  margin: 15px;
 }
