@@ -16,6 +16,7 @@ const User = db.define('user', {
       return () => this.getDataValue('password')
     }
   },
+  // ***** WILL NEED TO REVIEW THIS WITH TEAM (EVERYTHING BELOW) ******
   salt: {
     type: Sequelize.STRING,
     // Making `.salt` act like a function hides it when serializing to JSON.
@@ -26,6 +27,21 @@ const User = db.define('user', {
   },
   googleId: {
     type: Sequelize.STRING
+  }, // *****  WILL NEED TO REVIEW THIS WITH TEAM, EVERYTHING ABOVE *****
+  firstName: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {notEmpty: true}
+  },
+  lastName: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {notEmpty: true}
+  },
+  imageUrl: {
+    type: Sequelize.TEXT,
+    defaultValue:
+      'https://images.ctfassets.net/oxjq45e8ilak/2TGv5KhlzHxWNVtNyseaEY/f4f2108d1340fbeb2a57cf3c2d363bf0/MicrosoftTeams-image__1_.png'
   }
 })
 

@@ -1,10 +1,22 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {logout} from '../store'
+import {logout} from '../../store'
 import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom'
+import LoginForm from './login-form'
 
 const Navbar = () => {
+  // to show login form when nav link is clicked
+  const showForm = () => {
+    let hiddenForm = document.getElementById('login-form')
+
+    if (hiddenForm.style.display === 'block') {
+      hiddenForm.style.display = 'none'
+    } else {
+      hiddenForm.style.display = 'block'
+    }
+  }
+
   return (
     <Router>
       <div id="nav-bar">
@@ -15,11 +27,12 @@ const Navbar = () => {
         </div>
         <div id="nav-logo">CLOAK & DOGGER</div>
         <div className="nav-links">
-          <Link to="/login">Log in</Link>
+          <Link onClick={showForm}>Log in</Link>
           <Link to="/login">Sign up</Link>
           <Link to="/cart">Cart</Link>
         </div>
       </div>
+      <LoginForm />
     </Router>
   )
 }

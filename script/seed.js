@@ -38,11 +38,21 @@ async function seed() {
   console.log(`seeded ${products.length} products`)
 
   // COMMENTING OUT FOR NOW. CAN BE UNCOMMENTED WHEN USER MODEL IS FINISHED
-  // const users = await Promise.all([
-  //   User.create({email: 'cody@email.com', password: '123'}),
-  //   User.create({email: 'murphy@email.com', password: '123'})
-  // ])
-  // console.log(`seeded ${users.length} users`)
+  const users = await Promise.all([
+    User.create({
+      email: 'cody@email.com',
+      password: '123',
+      firstName: 'Cody',
+      lastName: 'ThePug'
+    }),
+    User.create({
+      email: 'murphy@email.com',
+      password: '123',
+      firstName: 'Murphy',
+      lastName: 'TheMan'
+    })
+  ])
+  console.log(`seeded ${users.length} users`)
 
   console.log(`seeded successfully`)
 }
