@@ -25,7 +25,6 @@ export const getSingleProduct = id => async dispatch => {
 
 //reducer
 const product = (state = initialState, action) => {
-  console.log('state:', state)
   switch (action.type) {
     case ALL_PRODUCTS:
       return {...state, products: action.products}
