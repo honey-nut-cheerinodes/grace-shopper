@@ -1,5 +1,9 @@
-import {initialState} from './index'
 import axios from 'axios'
+
+const initialState = {
+  products: [],
+  product: {}
+}
 
 //action type for single product
 export const SINGLE_PRODUCT = 'SINGLE_PRODUCT'
@@ -21,6 +25,7 @@ export const getSingleProduct = id => async dispatch => {
 
 //reducer
 const product = (state = initialState, action) => {
+  console.log('state:', state)
   switch (action.type) {
     case ALL_PRODUCTS:
       return {...state, products: action.products}

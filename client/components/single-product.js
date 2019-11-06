@@ -1,7 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getSingleProduct} from '../store/product'
-import {Navbar} from './navbar'
 
 //Class component for single product
 import './single-product.css'
@@ -21,7 +20,6 @@ class SingleProduct extends React.Component {
   render() {
     return (
       <div>
-        <Navbar />
         <h1>{this.props.products.name}</h1>
         <table>
           <tbody>
