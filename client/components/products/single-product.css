@@ -1,0 +1,27 @@
+.add-btn {
+  padding: 20px 30px;
+  color: #ffffff;
+  font-weight: bold;
+  font: 12px graphik--medium, 'Helvetica Neue';
+  letter-spacing: 0.17em;
+  background-color: #4c4c4b;
+  border: 1px solid white;
+  border-radius: 2px;
+}
+
+.single-product {
+  display: flex;
+  flex-direction: row;
+  margin: 100px 15%;
+}
+
+.left-single-product,
+.right-single-product {
+  padding: 25px;
+}
+
+.left-single-product img {
+  width: 500px;
+  height: 500px;
+  object-fit: cover;
+}

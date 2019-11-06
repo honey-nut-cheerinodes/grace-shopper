@@ -41,14 +41,15 @@ export const getCheckoutItems = () => async dispatch => {
 
 // initial state
 const initialState = {
-  checkoutItems: [],
-  checkoutItem: {
-    name: 'Life Jacket',
-    price: '555',
-    imageUrl:
-      'https://ak9.picdn.net/shutterstock/videos/1037370149/thumb/1.jpg?ip=x480',
-    quantity: 1
-  }
+  checkoutItems: [
+    {
+      name: 'Life Jacket',
+      price: '555',
+      imageUrl:
+        'https://ak9.picdn.net/shutterstock/videos/1037370149/thumb/1.jpg?ip=x480',
+      quantity: 1
+    }
+  ]
 }
 
 // reducer

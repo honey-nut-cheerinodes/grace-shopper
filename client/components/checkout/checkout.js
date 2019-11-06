@@ -8,6 +8,7 @@ import getCheckoutItems from '../../store/checkout'
 class Checkout extends Component {
   constructor() {
     super()
+    console.log('props: ', this.props)
     this.handleClick = this.handleClick.bind(this)
   }
 
@@ -31,7 +32,8 @@ class Checkout extends Component {
       <div>
         <div>
           <Link to="/">← Back to Shopping</Link>
-          {this.props.checkoutItems.map(item => {
+          {console.log('map: ', this.props.checkoutItems)}
+          {(this.props.checkoutItems || []).map(item => {
             return (
               <CheckoutItem
                 item={item}
@@ -55,7 +57,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getCheckoutItems: orderId => dispatch(getCheckoutItems(orderId))
+  getCheckoutItems: () => dispatch(getCheckoutItems())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout)

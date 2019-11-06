@@ -4,7 +4,7 @@ import {Navbar, Footer, WelcomePage, AllProducts, errorPage} from './components'
 import Routes from './routes'
 import {Link, Switch, Route} from 'react-router-dom'
 import userProfile from './components/user-profile'
-import SingleProduct from './components/single-product'
+import SingleProduct from './components/products/single-product'
 import Checkout from './components/checkout/checkout'
 
 const App = () => {
