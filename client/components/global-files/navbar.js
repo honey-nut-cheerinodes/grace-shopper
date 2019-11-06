@@ -24,7 +24,7 @@ const Navbar = () => {
           <Link to="/dogs">Dogs</Link>
           <Link to="/cats">Cats</Link>
           <Link to="/others">Other Pets</Link>
-          <Link to="/allProducts">All Products</Link>
+          <Link to="/products">All Products</Link>
         </div>
         <div id="nav-logo">CLOAK & DOGGER</div>
         <div className="nav-links">
