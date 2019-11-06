@@ -1,17 +1,28 @@
-import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
+import React from 'react'
 
-class OrderSummary extends Component {
-  constructor() {
-    super()
-    this.handleClick = this.handleClick.bind(this)
-  }
-
-  handleClick() {}
-
-  render() {
-    return <div />
-  }
+const OrderSummary = props => {
+  return (
+    <div>
+      <l>
+        <h3>Order Summary</h3>
+      </l>
+      <l>
+        <p className="left">Subtotal</p>
+        <p className="right">$98</p> {/* access via props */}
+      </l>
+      <l>
+        <p className="left">Shipping</p>
+        <p className="right">$98</p> {/* access via props */}
+      </l>
+      <l>
+        <p className="left">Total</p>
+        <p className="right">$98</p> {/* access via props */}
+      </l>
+      <button type="button" method="CHECKOUT" className="checkout-btn">
+        CONTINUE TO CHECKOUT
+      </button>
+    </div>
+  )
 }
 
 export default OrderSummary
