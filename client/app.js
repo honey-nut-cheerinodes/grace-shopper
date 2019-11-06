@@ -5,6 +5,7 @@ import Routes from './routes'
 import {Link, Switch, Route} from 'react-router-dom'
 import userProfile from './components/user-profile'
 import SingleProduct from './components/single-product'
+import Checkout from './components/checkout/checkout'
 
 const App = () => {
   // to make changes to the nav bar whenever we scroll
@@ -23,7 +24,6 @@ const App = () => {
 
   return (
     <div>
-      {/* Navbar component */}
       <Navbar />
 
       <Switch>
@@ -31,6 +31,7 @@ const App = () => {
         <Route exact path="/products/:id" component={SingleProduct} />
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/profile" component={userProfile} />
+        <Route exact path="/checkout/1" component={Checkout} />
         <Route component={errorPage} />
       </Switch>
 

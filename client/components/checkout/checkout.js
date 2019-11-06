@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import CheckoutItem from './checkout-item'
 import OrderSummary from './order-summary'
 import {connect} from 'react-redux'
-import getCheckoutItems from '../store/checkout'
+import getCheckoutItems from '../../store/checkout'
 
 class Checkout extends Component {
   constructor() {
@@ -15,14 +15,14 @@ class Checkout extends Component {
     switch (event.method) {
       case 'ADD_ONE':
         this.props.getCheckoutItems()
-      case 'REMOVE_ONE':
-        return 'remove one' // trigger thunk
-      case 'DELETE_ITEM':
-        return 'delete item' // trigger thunk
-      case 'CHECKOUT':
-        return 'continue to checkout' // trigger thunk
+      // case 'REMOVE_ONE':
+      //   return 'remove one' // trigger thunk
+      // case 'DELETE_ITEM':
+      //   return 'delete item' // trigger thunk
+      // case 'CHECKOUT':
+      //   return 'continue to checkout' // trigger thunk
       default:
-        return 'default'
+        return event
     }
   }
 
