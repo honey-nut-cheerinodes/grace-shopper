@@ -180,6 +180,12 @@ form h3 {
   background-color: #efeeee;
   z-index: 100;
   padding: 75px;
+  box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+}
+
+#login-form p {
+  font-size: 11px;
+  margin-top: -25px;
 }
 
 input {

@@ -28,6 +28,7 @@ export default class LoginForm extends React.Component {
   render() {
     return (
       <form id="login-form">
+        {/* <p>CLOSE</p> */}
         <h2>Good to see you again.</h2>
         <h3>Please log in.</h3>
         <br />
