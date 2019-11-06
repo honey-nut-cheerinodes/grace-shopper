@@ -27,9 +27,7 @@ const Navbar = () => {
         </div>
         <div id="nav-logo">CLOAK & DOGGER</div>
         <div className="nav-links">
-          <Link to="/login">
-            <span onClick={showForm}>Log in</span>
-          </Link>
+          <Link onClick={showForm}>Log in</Link>
           <Link to="/login">Sign up</Link>
           <Link to="/cart">Cart</Link>
         </div>

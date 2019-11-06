@@ -1,10 +1,10 @@
 import React from 'react'
 
-import {Navbar} from './components'
+import {Navbar, Footer} from './components'
 import {WelcomePage} from './components'
 import Routes from './routes'
 import {Link, Switch, Route} from 'react-router-dom'
-import userProfile from './components/userProfile'
+import userProfile from './components/user-profile'
 
 const App = () => {
   // to make changes to the nav bar whenever we scroll
@@ -22,7 +22,7 @@ const App = () => {
   })
 
   return (
-    <div className="main-nav">
+    <div>
       {/* Navbar component */}
       <Navbar />
 
@@ -31,6 +31,8 @@ const App = () => {
         {/* <Route exact path= '/allProducts' component={AllProducts} />  ***NEED TO IMPORT THIS ON TOP WHEN RECEIVED***   */}
         <Route exact path="/profile" component={userProfile} />
       </Switch>
+
+      <Footer />
     </div>
   )
 }

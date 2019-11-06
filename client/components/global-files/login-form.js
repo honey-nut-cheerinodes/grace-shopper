@@ -15,7 +15,7 @@ export default class LoginForm extends React.Component {
     const changeInput = event.target.name
     const input = event.target.value
     this.setState({[changeInput]: input})
-    console.log(this.state)
+    // console.log(this.state)
   }
 
   handleSubmit(event) {

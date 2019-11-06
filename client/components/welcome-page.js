@@ -1,8 +1,22 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import Footer from './global-files/footer'
+import Navbar from './global-files/navbar'
 
 const App = () => {
+  // load without nav background on main page
+  window.addEventListener('load', () => {
+    let editNavBar = document.getElementById('nav-bar')
+    let editNavBarLinks = document.getElementsByTagName('a')
+
+    editNavBar.style.color = 'white'
+    editNavBar.style.background = 'none'
+
+    for (let i = 0; i < editNavBarLinks.length; i++) {
+      editNavBarLinks[i].style.color = 'white'
+    }
+  })
+
   return (
     <div>
       {/* welcome page info */}
@@ -12,6 +26,12 @@ const App = () => {
         <button type="button" className="shop-btn">
           SHOP NOW
         </button>
+      </div>
+
+      {/* Quote component */}
+      <div className="quote">
+        Finely curated pieces - hand-woven, designed, and created with your pet
+        in mind.
       </div>
 
       {/* shope now component */}
@@ -49,7 +69,7 @@ const App = () => {
       </div>
 
       {/* footer */}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   )
 }
