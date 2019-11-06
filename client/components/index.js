@@ -6,6 +6,7 @@
 export {default as Navbar} from './global-files/navbar'
 export {default as Footer} from './global-files/footer'
 export {default as WelcomePage} from './welcome-page'
+export {default as errorPage} from './errorPage'
 export {default as AllProducts} from './products/all-products'
 export {default as UserHome} from './user-home'
 export {Login, Signup} from './auth-form'
