@@ -83,6 +83,8 @@ button {
 
 .nav-links {
   padding: 0 75px;
+  letter-spacing: 0.05em;
+  font-size: 15px;
 }
 
 .nav-links a {
