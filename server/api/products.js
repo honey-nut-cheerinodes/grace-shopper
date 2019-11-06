@@ -18,7 +18,7 @@ router.get('/:id', async (req, res, next) => {
 router.get('/', async (req, res, next) => {
   try {
     const products = await Product.findAll({
-      attributes: ['name', 'price', 'description', 'imageUrl', 'type']
+      attributes: ['id', 'name', 'price', 'description', 'imageUrl', 'type']
     })
     res.json(products)
   } catch (err) {

@@ -1,10 +1,10 @@
 import React from 'react'
 
-import {Navbar, Footer} from './components'
-import {WelcomePage} from './components'
+import {Navbar, Footer, WelcomePage, AllProducts} from './components'
 import Routes from './routes'
 import {Link, Switch, Route} from 'react-router-dom'
 import userProfile from './components/user-profile'
+import SingleProduct from './components/single-product'
 
 const App = () => {
   // to make changes to the nav bar whenever we scroll
@@ -28,7 +28,8 @@ const App = () => {
 
       <Switch>
         <Route exact path="/" component={WelcomePage} />
-        {/* <Route exact path= '/allProducts' component={AllProducts} />  ***NEED TO IMPORT THIS ON TOP WHEN RECEIVED***   */}
+        <Route exact path="/products/:id" component={SingleProduct} />
+        <Route exact path="/products" component={AllProducts} />
         <Route exact path="/profile" component={userProfile} />
       </Switch>
 

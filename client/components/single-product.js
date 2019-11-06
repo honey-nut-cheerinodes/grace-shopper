@@ -20,14 +20,14 @@ class SingleProduct extends React.Component {
   render() {
     return (
       <div>
-        <h1>{this.props.products.name}</h1>
+        <h1>{this.props.product.product.name}</h1>
         <table>
           <tbody>
-            <img src={this.props.products.imageUrl} />
-            <h2>{this.props.products.name}</h2>
-            <h3>{this.props.products.price}</h3>
+            <img src={this.props.product.imageUrl} />
+            <h2>{this.props.product.product.name}</h2>
+            <h3>{this.props.product.product.price}</h3>
             <h4>DESCRIPTION</h4>
-            <h4>{this.props.products.description}</h4>
+            <h4>{this.props.product.product.description}</h4>
             <h5>
               <i className="far fa-star" />
               <i className="far fa-star" />
@@ -38,7 +38,6 @@ class SingleProduct extends React.Component {
             <button type="button" className="add-btn">
               ADD
             </button>
-            {/* <Footer /> */}
           </tbody>
         </table>
       </div>
