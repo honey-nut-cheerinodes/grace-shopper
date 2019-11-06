@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import CheckoutItem from './checkout-item'
 import OrderSummary from './order-summary'
+import {connect} from 'react-redux'
+import getCheckoutItems from '../store/checkout'
 
 class Checkout extends Component {
   constructor() {
@@ -12,7 +14,7 @@ class Checkout extends Component {
   handleClick(event) {
     switch (event.method) {
       case 'ADD_ONE':
-        return 'add one' // trigger thunk
+        this.props.getCheckoutItems()
       case 'REMOVE_ONE':
         return 'remove one' // trigger thunk
       case 'DELETE_ITEM':
@@ -27,22 +29,33 @@ class Checkout extends Component {
   render() {
     return (
       <div>
-        <Link to="/">← Back to Shopping</Link>
-        {this.props.checkoutItems.map(item => {
-          // define checkoutItems in action creator
-          return (
-            <CheckoutItem
-              item={item}
-              key={item.id}
-              handleClick={this.handleClick}
-            />
-          )
-        })}
-        {/* do i need separate divs for CheckoutItem and OrderSummary? */}
-        <OrderSummary handleClick={this.handleClick} /> {/* add more props? */}
+        <div>
+          <Link to="/">← Back to Shopping</Link>
+          {this.props.checkoutItems.map(item => {
+            return (
+              <CheckoutItem
+                item={item}
+                key={item.id}
+                handleClick={this.handleClick}
+              />
+            )
+          })}
+        </div>
+        <div>
+          <OrderSummary handleClick={this.handleClick} />
+        </div>
       </div>
     )
   }
 }
 
-export default Checkout
+const mapStateToProps = state => ({
+  checkoutItems: state.checkoutItems,
+  checkoutItem: state.checkoutItem
+})
+
+const mapDispatchToProps = dispatch => ({
+  getCheckoutItems: orderId => dispatch(getCheckoutItems(orderId))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout)

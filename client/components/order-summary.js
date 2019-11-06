@@ -8,15 +8,15 @@ const OrderSummary = props => {
       </l>
       <l>
         <p className="left">Subtotal</p>
-        <p className="right">$98</p> {/* access via props */}
+        <p className="right">$555</p>
       </l>
       <l>
         <p className="left">Shipping</p>
-        <p className="right">$98</p> {/* access via props */}
+        <p className="right">Free</p>
       </l>
       <l>
         <p className="left">Total</p>
-        <p className="right">$98</p> {/* access via props */}
+        <p className="right">$555</p>
       </l>
       <button type="button" method="CHECKOUT" className="checkout-btn">
         CONTINUE TO CHECKOUT

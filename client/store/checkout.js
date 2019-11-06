@@ -35,14 +35,20 @@ export const checkedOut = checkout => ({
 
 // thunk creators and thunks
 export const getCheckoutItems = orderId => async dispatch => {
-  const {checkoutItems} = await axios.get(`/api/checkout/${orderId}`)
+  const {checkoutItems} = await axios.get(`/api/checkout/${orderId}`) // see how we can access sessions order id in our model
   dispatch(gotCheckoutItems(checkoutItems))
 }
 
 // initial state
 const initialState = {
-  checkoutItems: {},
-  checkoutItem: []
+  checkoutItems: [],
+  checkoutItem: {
+    name: 'Life Jacket',
+    price: '555',
+    imageUrl:
+      'https://ak9.picdn.net/shutterstock/videos/1037370149/thumb/1.jpg?ip=x480',
+    quantity: 1
+  }
 }
 
 // reducer
