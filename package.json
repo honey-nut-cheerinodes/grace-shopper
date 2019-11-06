@@ -1,7 +1,7 @@
 {
   "name": "cloak-n-dogger",
   "version": "1.0.0",
-  "description": "Dress your pets in the best",
+  "description": "Dress your pets in the best.",
   "engines": {
     "node": ">= 7.0.0"
   },
