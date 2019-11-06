@@ -27,7 +27,10 @@ const Product = db.define('product', {
       'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-image_large.png?v=1530129081'
   },
   type: {
-    type: Sequelize.ENUM('Dog', 'Cat', 'Other')
+    type: Sequelize.STRING,
+    validate: {
+      isIn: [['Dog', 'Cat', 'Other']]
+    }
   }
 })
 
