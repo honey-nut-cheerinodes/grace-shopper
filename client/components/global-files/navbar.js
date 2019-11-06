@@ -18,12 +18,13 @@ const Navbar = () => {
   }
 
   return (
-    <Router>
+    <React.Fragment>
       <div id="nav-bar">
         <div className="nav-links">
           <Link to="/dogs">Dogs</Link>
           <Link to="/cats">Cats</Link>
           <Link to="/others">Other Pets</Link>
+          <Link to="/products">All Products</Link>
         </div>
         <div id="nav-logo">CLOAK & DOGGER</div>
         <div className="nav-links">
@@ -33,7 +34,7 @@ const Navbar = () => {
         </div>
       </div>
       <LoginForm />
-    </Router>
+    </React.Fragment>
   )
 }
 
