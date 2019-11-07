@@ -1,24 +1,26 @@
 import React from 'react'
+import './order-summary.css'
 
 const OrderSummary = props => {
   return (
-    <div>
-      <span>
+    <div id="order-sum">
+      <span className="order-sum-heading">
         <h3>Order Summary</h3>
       </span>
-      <span>
-        <p className="left">Subtotal</p>
-        <p className="right">$555</p>
+      <span className="order-sum-body">
+        <p>Subtotal</p>
+        <p>$555</p>
       </span>
-      <span>
-        <p className="left">Shipping</p>
-        <p className="right">Free</p>
+      <span className="order-sum-body">
+        <p>Shipping</p>
+        <p>Free</p>
       </span>
-      <span>
-        <p className="left">Total</p>
-        <p className="right">$555</p>
+      <span className="order-sum-body">
+        <p>Total</p>
+        <p>$555</p>
       </span>
-      <button type="button" method="CHECKOUT" className="checkout-btn">
+
+      <button type="button" onClick={props.checkout} id="checkout-btn">
         CONTINUE TO CHECKOUT
       </button>
     </div>

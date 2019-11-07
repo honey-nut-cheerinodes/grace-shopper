@@ -1,0 +1,31 @@
+#order-sum {
+  padding-top: 100px;
+  width: 280px;
+}
+
+.order-sum-heading {
+  display: flex;
+  align-content: center; /* not working */
+  justify-content: space-evenly;
+  background-color: #efeeee;
+  height: 40px;
+  padding: 17px;
+}
+
+.order-sum-body {
+  display: flex;
+  align-content: center; /* not working */
+  justify-content: space-between;
+  background-color: #efeeee;
+  border-top: 0.5px solid lightgray;
+  height: 40px;
+  padding: 17px;
+}
+
+#checkout-btn {
+  background-color: darkslategray;
+  border: 1px solid darkslategray;
+  color: white;
+  width: 280px;
+  padding: 18px;
+}
