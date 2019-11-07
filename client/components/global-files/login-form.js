@@ -1,6 +1,9 @@
 import React from 'react'
+import {connect} from 'react-redux'
+import {getUserLogin} from '../../store/user'
+import {Redirect} from 'react-router-dom'
 
-export default class LoginForm extends React.Component {
+class LoginForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -11,18 +14,22 @@ export default class LoginForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  componentDidMount() {
+    this.props.getUserLogin()
+  }
+
   handleChange(event) {
     const changeInput = event.target.name
     const input = event.target.value
     this.setState({[changeInput]: input})
-    // console.log(this.state)
   }
 
-  handleSubmit(event) {
-    event.preventDefault()
-    // *** NOTE: need to update this with whatever function is in the store ***
-
-    // this.props.updateStudentInfo(this.state);
+  handleSubmit(evt) {
+    evt.preventDefault()
+    const email = this.state.email
+    const password = this.state.password
+    // console.log(email, password)
+    this.props.getUserLogin(email, password)
   }
 
   render() {
@@ -50,3 +57,20 @@ export default class LoginForm extends React.Component {
     )
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  getUserLogin: (email, password) => dispatch(getUserLogin(email, password))
+})
+
+export default connect(null, mapDispatchToProps)(LoginForm)
+
+// CAN DELETE, keeping for now for reference vvvvv - athena
+
+// const mapStateToProps = state => ({
+//   email: state.email,
+//   password: state.password,
+// })
+
+// const mapDispatchToProps = (dispatch) => ({
+//   getUserLogin: (loginInfo) => dispatch(this.handleSubmit(loginInfo))
+// })
