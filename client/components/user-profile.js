@@ -1,17 +1,13 @@
 import React from 'react'
 import {Navbar, Footer} from './index'
+import {connect} from 'react-redux'
 
-export default class UserProfile extends React.Component {
+class UserProfile extends React.Component {
   constructor() {
     super()
     this.state = {
-      // this all needs to be prepopulated with the userInfo we get from our store
-      firstName: 'Sammy',
-      lastName: 'Samoyed',
       imageUrl:
-        'https://66.media.tumblr.com/c6434ca12fe7d26aecea612f686e23f1/tumblr_pp0zcqQ2OT1r4x5j7o1_400.jpg',
-      email: 'SStheDog@aol.com',
-      password: ''
+        'https://66.media.tumblr.com/c6434ca12fe7d26aecea612f686e23f1/tumblr_pp0zcqQ2OT1r4x5j7o1_400.jpg'
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -25,13 +21,12 @@ export default class UserProfile extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
+    // NEED TO ADD FUNCTION STUFF HERE!
   }
 
   render() {
     return (
       <div>
-        <div className="userProfile">{/* <Navbar /> */}</div>
-
         <div className="user-profile-body">
           <img src={this.state.imageUrl} />
 
@@ -42,7 +37,7 @@ export default class UserProfile extends React.Component {
               name="firstName"
               type="text"
               onChange={this.handleChange}
-              placeholder={this.state.firstName}
+              placeholder={this.props.firstName}
             />
 
             <label htmlFor="lastName">Last name:</label>
@@ -50,7 +45,7 @@ export default class UserProfile extends React.Component {
               name="lastName"
               type="text"
               onChange={this.handleChange}
-              placeholder={this.state.lastName}
+              placeholder={this.props.lastName}
             />
 
             <label htmlFor="email">Email:</label>
@@ -58,7 +53,7 @@ export default class UserProfile extends React.Component {
               name="email"
               type="text"
               onChange={this.handleChange}
-              placeholder={this.state.email}
+              placeholder={this.props.email}
             />
 
             <label htmlFor="password">Password:</label>
@@ -66,7 +61,7 @@ export default class UserProfile extends React.Component {
               name="password"
               type="text"
               onChange={this.handleChange}
-              placeholder={this.state.password}
+              placeholder="NEED TO PUT PASSWORD FUNC HERE!"
             />
 
             <button type="button" className="submit-btn">
@@ -75,9 +70,22 @@ export default class UserProfile extends React.Component {
             </button>
           </form>
         </div>
-
-        {/* <Footer /> */}
       </div>
     )
   }
 }
+
+const mapStateToProps = state => ({
+  firstName: state.user.firstName,
+  lastName: state.user.lastName,
+  email: state.user.email
+})
+
+export default connect(mapStateToProps)(UserProfile)
+
+// const mapStateToProps = state => {
+//   // console.log('from profile-page', state.user)
+//   return {
+//     email: state.user
+//   }
+// }

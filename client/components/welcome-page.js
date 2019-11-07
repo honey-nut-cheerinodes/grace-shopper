@@ -1,10 +1,9 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import Footer from './global-files/footer'
-import Navbar from './global-files/navbar'
 
 const App = () => {
   // load without nav background on main page
+
   window.addEventListener('load', () => {
     let editNavBar = document.getElementById('nav-bar')
     let editNavBarLinks = document.getElementsByTagName('a')
@@ -67,9 +66,6 @@ const App = () => {
           </Link>
         </div>
       </div>
-
-      {/* footer */}
-      {/* <Footer /> */}
     </div>
   )
 }
