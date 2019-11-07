@@ -111,12 +111,14 @@ async function seed() {
     {
       quantity: 1,
       status: 'Ordered',
-      orderId: 1000
+      orderId: 1000,
+      userId: 1
     },
     {
       quantity: 2,
       status: 'Fulfilled',
-      orderId: 1001
+      orderId: 1001,
+      userId: 2
     },
     {
       quantity: 1,
@@ -129,13 +131,6 @@ async function seed() {
       orderId: 1003
     }
   ]
-
-  await Promise.all(
-    checkoutItems.map(item => {
-      return Checkout.create(item)
-    })
-  )
-  console.log(`seeded ${checkoutItems.length} checkout`)
 
   await Promise.all(
     products.map(product => {
@@ -158,6 +153,13 @@ async function seed() {
       lastName: 'TheMan'
     })
   ])
+
+  await Promise.all(
+    checkoutItems.map(item => {
+      return Checkout.create(item)
+    })
+  )
+  console.log(`seeded ${checkoutItems.length} checkout`)
   console.log(`seeded ${users.length} users`)
 
   console.log(`seeded successfully`)
