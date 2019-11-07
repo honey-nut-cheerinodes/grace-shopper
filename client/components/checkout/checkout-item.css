@@ -1,0 +1,38 @@
+.cart-line-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+img {
+  width: 175px;
+  height: 175px;
+}
+
+.item-info {
+  width: 300px;
+}
+
+.item-info-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.item-info-bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.item-quantity {
+}
+
+.delete-item-btn {
+  color: gray;
+}
+
+.remove-one-btn {
+  color: gray;
+}
+
+.add-one.btn {
+  color: gray;
+}

@@ -4,6 +4,7 @@ import CheckoutItem from './checkout-item'
 import OrderSummary from './order-summary'
 import {connect} from 'react-redux'
 import {getCheckoutItems} from '../../store/checkout'
+import './checkout.css'
 
 class Checkout extends Component {
   // constructor(props) {
@@ -36,20 +37,14 @@ class Checkout extends Component {
 
   render() {
     return (
-      <div>
-        <div>
+      <div id="checkout-body">
+        <div id="cart">
           <Link to="/">← Back to Shopping</Link>
-          {console.log('mapped checkout items: ', this.props)}
+          <hr />
+          {console.log('mapped checkout items: ', this.props.checkoutItems)}
+          <p>Dummy data here</p>
           {(this.props.checkoutItems || []).map(item => {
-            return (
-              <CheckoutItem
-                item={item}
-                key={item.id}
-                addOne={this.addOne}
-                removeOne={this.removeOne}
-                deleteItem={this.deleteItem}
-              />
-            )
+            return <CheckoutItem item={item} key={item.id} />
           })}
         </div>
         <div>
