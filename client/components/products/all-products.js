@@ -9,10 +9,28 @@ class DisconnectedAllProducts extends Component {
     this.props.getAllProducts()
   }
   render() {
-    const products = this.props.products
+    //figure out which set of items the user wants to see, based on URL path
+    let type = 'all'
+    switch (this.props.match.url.slice(1)) {
+      case 'cats':
+        type = 'cat'
+        break
+      case 'dogs':
+        type = 'dog'
+        break
+      case 'others':
+        type = 'other'
+        break
+      default:
+        type = 'all'
+        break
+    }
+
+    const products = this.props.products.filter(product => {
+      if (product.type === type || type === 'all') return product
+    })
 
     return (
-      // TODO: add breadcrumb
       <div id="all-products">
         {products !== undefined ? (
           products.map(product => {
