@@ -9,29 +9,33 @@ describe('User model', () => {
   beforeEach(() => {
     return db.sync({force: true})
   })
+  const user = {
+    email: 'cody@email.com',
+    firstName: 'Cody',
+    lastName: 'ThePug',
+    imageUrl:
+      'https://images.ctfassets.net/oxjq45e8ilak/2TGv5KhlzHxWNVtNyseaEY/f4f2108d1340fbeb2a57cf3c2d363bf0/MicrosoftTeams-image__1_.png',
+    password: 'ca69ad65f3f75025ce78afcf5aa88440e71fd29c9a93975d374716ae20909026'
+  }
 
-  it('should have property email with value cody@email.com', function() {
-    let User = {email: 'cody@email.com'}
+  it('should have property `email`', function() {
+    user.should.have.property('email').equal('cody@email.com')
+  })
 
-    User.should.have.property('email').equal('cody@email.com')
+  it('should have property `first name` and `last name`', function() {
+    user.should.have.property('firstName').equal('Cody')
+    user.should.have.property('lastName').equal('ThePug')
+  })
+
+  it('should have property `password`', function() {
+    user.should.have
+      .property('password')
+      .equal('ca69ad65f3f75025ce78afcf5aa88440e71fd29c9a93975d374716ae20909026')
   })
 
   it('checks for null', function() {
-    let User = null
-    should.not.exist(User)
-  })
-
-  it('requires `email`', async () => {
-    const user = User.build()
-
-    try {
-      await user.validate()
-      throw Error(
-        'validation was successful but should have failed without `email`'
-      )
-    } catch (err) {
-      expect(err.message).to.contain('name cannot be null')
-    }
+    var user = null
+    should.not.exist(user)
   })
 
   describe('instanceMethods', () => {
