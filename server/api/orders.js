@@ -2,6 +2,8 @@ const router = require('express').Router()
 const Orders = require('../db/models/orders')
 const Product = require('../db/models/product')
 
+router.use('/guest', require('./guest-checkout'))
+
 router.get('/', async (req, res, next) => {
   try {
     // const cart = await Orders.findAll({where: {status: 'In cart'}})
@@ -16,8 +18,6 @@ router.get('/', async (req, res, next) => {
     next(error)
   }
 })
-
-// passport has a method that returns the currently logged-in user; there won't be a userId associated with a guest.....
 
 // router.put('/', async (req, res, next) => {
 
