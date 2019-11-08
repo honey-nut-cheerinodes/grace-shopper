@@ -5,10 +5,6 @@ import {getSingleProduct} from '../../store/product'
 //Class component for single product
 import './single-product.css'
 class SingleProduct extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-
   componentDidMount() {
     try {
       this.props.getSingleProduct(this.props.match.params.id)
