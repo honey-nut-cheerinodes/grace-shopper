@@ -2,12 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {logout} from '../../store'
-import {BrowserRouter as Router, Link, Route, Switch} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import LoginForm from './login-form'
 
-const Navbar = () => {
+class Navbar extends React.Component {
+  constructor() {
+    super()
+    this.showForm = this.showForm.bind(this)
+    this.handleClick = this.handleClick.bind(this)
+  }
+
   // to show login form when nav link is clicked
-  const showForm = () => {
+  showForm = () => {
     let hiddenForm = document.getElementById('login-form')
 
     if (hiddenForm.style.display === 'block') {
@@ -17,31 +23,66 @@ const Navbar = () => {
     }
   }
 
-  return (
-    <React.Fragment>
-      <div id="nav-bar">
-        <div className="nav-links">
-          <Link to="/dogs">Dogs</Link>
-          <Link to="/cats">Cats</Link>
-          <Link to="/others">Other Pets</Link>
-          <Link to="/products">All Products</Link>
+  handleClick = () => {
+    this.props.logout()
+  }
+
+  render() {
+    return (
+      <React.Fragment>
+        <div id="nav-bar">
+          <div className="nav-links">
+            <Link to="/dogs">Dogs</Link>
+            <Link to="/cats">Cats</Link>
+            <Link to="/others">Other Pets</Link>
+            <Link to="/products">All Products</Link>
+          </div>
+          <Link to="/" id="nav-logo">
+            CLOAK & DOGGER
+          </Link>
+          <div className="nav-links">
+            {/* MADE CHANGES TO LOGIN & SIGN UP, NEED TO FIX!!! */}
+            {this.props.isLoggedIn ? (
+              <Link to="/" onClick={this.handleClick}>
+                Log out
+              </Link>
+            ) : (
+              <Link onClick={this.showForm}>Log in</Link>
+            )}
+            <Link to="/sign-up">Sign up</Link>
+            <Link to="/cart">Cart</Link>
+          </div>
         </div>
-        <Link to="/" id="nav-logo">
-          CLOAK & DOGGER
-        </Link>
-        <div className="nav-links">
-          {/* MADE CHANGES TO LOGIN & SIGN UP, NEED TO FIX!!! */}
-          <Link onClick={showForm}>Log in</Link>
-          <Link to="/sign-up">Sign up</Link>
-          <Link to="/cart">Cart</Link>
-        </div>
-      </div>
-      <LoginForm />
-    </React.Fragment>
-  )
+        <LoginForm />
+      </React.Fragment>
+    )
+  }
 }
 
-export default Navbar
+const mapStateToProps = state => {
+  return {
+    isLoggedIn: !!state.user.email
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    logout: () => dispatch(logout())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
+// export default Navbar
+
+/**
+ * PROP TYPES
+ */
+Navbar.propTypes = {
+  handleClick: PropTypes.func.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired
+}
+
+// export default Navbar
 
 // const Navbar = ({handleClick, isLoggedIn}) => (
 //   <div>
@@ -85,11 +126,3 @@ export default Navbar
 // }
 
 // export default connect(mapState, mapDispatch)(Navbar)
-
-// /**
-//  * PROP TYPES
-//  */
-// Navbar.propTypes = {
-//   handleClick: PropTypes.func.isRequired,
-//   isLoggedIn: PropTypes.bool.isRequired
-// }
