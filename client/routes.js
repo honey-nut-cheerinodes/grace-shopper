@@ -6,7 +6,7 @@ import {me} from './store'
 import SingleProduct from './components/products/single-product'
 import {WelcomePage, AllProducts, errorPage} from './components'
 import userProfile from './components/user-profile'
-import Checkout from './components/checkout/checkout'
+import Cart from './components/cart/cart'
 
 /**
  * COMPONENT
@@ -26,7 +26,7 @@ class Routes extends Component {
         <Route exact path="/products/:id" component={SingleProduct} />
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/profile" component={userProfile} />
-        <Route exact path="/checkout/1" component={Checkout} />
+        <Route exact path="/cart" component={Cart} />
         <Route component={errorPage} />
       </Switch>
     )
