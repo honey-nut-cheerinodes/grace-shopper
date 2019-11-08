@@ -1,16 +1,30 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getSingleProduct} from '../../store/product'
+import {addItem} from '../../store/guest-checkout'
 
 //Class component for single product
 import './single-product.css'
 class SingleProduct extends React.Component {
+  constructor(props) {
+    super(props)
+    this.handleAdd = this.handleAdd.bind(this)
+  }
+
   componentDidMount() {
     try {
       this.props.getSingleProduct(this.props.match.params.id)
     } catch (error) {
       console.error(error)
     }
+  }
+
+  handleAdd() {
+    const product = this.props.product.product
+    const newProduct = [
+      {productId: product.id, item: product.name, quantity: 1}
+    ]
+    this.props.addItem(newProduct)
   }
 
   render() {
@@ -32,7 +46,7 @@ class SingleProduct extends React.Component {
             <i className="far fa-star" />
             <i className="far fa-star" />
           </h5>
-          <button type="button" className="add-btn">
+          <button type="button" className="add-btn" onClick={this.handleAdd}>
             ADD TO BAG
           </button>
         </div>
@@ -46,7 +60,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getSingleProduct: id => dispatch(getSingleProduct(id))
+  getSingleProduct: id => dispatch(getSingleProduct(id)),
+  addItem: product => dispatch(addItem(product))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)

@@ -1,0 +1,13 @@
+#cart {
+  width: 500px;
+}
+
+#checkout-body {
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 100px;
+}
+
+hr {
+  border-top: 0.5px lightgray;
+}
