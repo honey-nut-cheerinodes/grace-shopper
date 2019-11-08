@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {getUserLogin} from '../../store/user'
 import {Redirect} from 'react-router-dom'
 
-class LoginForm extends React.Component {
+class SignUpForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -35,11 +35,14 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <form id="login-form">
+      <form id="signup-form">
         {/* <p>CLOSE</p> */}
-        <h2>Good to see you again.</h2>
-        <h3>Please log in.</h3>
+        <h2>New around town? Welcome!</h2>
         <br />
+        <label htmlFor="firstName">FIRST NAME: </label>
+        <input name="firstName" type="text" onChange={this.handleChange} />
+        <label htmlFor="lastName">LAST NAME: </label>
+        <input name="lastName" type="text" onChange={this.handleChange} />
         <label htmlFor="email">EMAIL ADDRESS: </label>
         <input name="email" type="text" onChange={this.handleChange} />
         <label htmlFor="password">PASSWORD: </label>
@@ -63,4 +66,4 @@ const mapDispatchToProps = dispatch => ({
   getUserLogin: (email, password) => dispatch(getUserLogin(email, password))
 })
 
-export default connect(null, mapDispatchToProps)(LoginForm)
+export default connect(null, mapDispatchToProps)(SignUpForm)

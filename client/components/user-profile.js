@@ -11,6 +11,7 @@ class UserProfile extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.showForm = this.showForm.bind(this)
   }
 
   handleChange(event) {
@@ -24,10 +25,18 @@ class UserProfile extends React.Component {
     // NEED TO ADD FUNCTION STUFF HERE!
   }
 
+  showForm = () => {
+    let hiddenForm = document.getElementById('login-form')
+
+    if (hiddenForm.style.display === 'block') {
+      hiddenForm.style.display = 'none'
+    }
+  }
+
   render() {
     return (
       <div>
-        <div className="user-profile-body">
+        <div className="user-profile-body" onLoad={this.showForm}>
           <img src={this.state.imageUrl} />
 
           <form className="update-profile">

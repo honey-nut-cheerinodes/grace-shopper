@@ -169,13 +169,14 @@ form h3 {
   text-align: center;
 }
 
-#login-form {
+#login-form,
+#signup-form {
   display: none;
   position: fixed;
   align-items: center;
   justify-content: center;
   width: 320px;
-  height: 350px;
+  max-height: 500px;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);

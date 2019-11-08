@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {logout} from '../../store'
 import {Link} from 'react-router-dom'
 import LoginForm from './login-form'
+import SignUpForm from './signup-form'
 
 class Navbar extends React.Component {
   constructor() {
@@ -13,8 +14,14 @@ class Navbar extends React.Component {
   }
 
   // to show login form when nav link is clicked
-  showForm = () => {
-    let hiddenForm = document.getElementById('login-form')
+  showForm = action => {
+    let hiddenForm
+
+    if (action === 'login') {
+      hiddenForm = document.getElementById('login-form')
+    } else {
+      hiddenForm = document.getElementById('signup-form')
+    }
 
     if (hiddenForm.style.display === 'block') {
       hiddenForm.style.display = 'none'
@@ -47,13 +54,18 @@ class Navbar extends React.Component {
                 Log out
               </Link>
             ) : (
-              <Link onClick={this.showForm}>Log in</Link>
+              <span>
+                <Link onClick={() => this.showForm('login')}>Log in</Link>
+                <Link to="/sign-up" onClick={() => this.showForm('signup')}>
+                  Sign up
+                </Link>
+              </span>
             )}
-            <Link to="/sign-up">Sign up</Link>
             <Link to="/cart">Cart</Link>
           </div>
         </div>
         <LoginForm />
+        <SignUpForm />
       </React.Fragment>
     )
   }
@@ -72,11 +84,8 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
-// export default Navbar
 
-/**
- * PROP TYPES
- */
+// Proptypes
 Navbar.propTypes = {
   handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired
