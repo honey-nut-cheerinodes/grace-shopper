@@ -11,6 +11,7 @@ class UserProfile extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.showForm = this.showForm.bind(this)
   }
 
   handleChange(event) {
@@ -24,11 +25,27 @@ class UserProfile extends React.Component {
     // NEED TO ADD FUNCTION STUFF HERE!
   }
 
+  showForm = () => {
+    let hideLogin = document.getElementById('login-form')
+    let hideSignup = document.getElementById('signup-form')
+
+    if (
+      hideLogin.style.display === 'block' ||
+      hideSignup.style.display === 'block'
+    ) {
+      hideLogin.style.display = 'none'
+      hideSignup.style.display = 'none'
+    }
+  }
+
   render() {
     return (
       <div>
-        <div className="user-profile-body">
-          <img src={this.state.imageUrl} />
+        <div className="user-profile-body" onLoad={this.showForm}>
+          <div className="user-profile-body-left">
+            <h1>Welcome, {this.props.firstName}!</h1> <p />
+            <img src={this.state.imageUrl} />
+          </div>
 
           <form className="update-profile">
             <h2> Edit profile information</h2>
@@ -61,7 +78,7 @@ class UserProfile extends React.Component {
               name="password"
               type="text"
               onChange={this.handleChange}
-              placeholder="NEED TO PUT PASSWORD FUNC HERE!"
+              placeholder="Enter updated password"
             />
 
             <button type="button" className="submit-btn">

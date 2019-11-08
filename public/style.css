@@ -4,8 +4,10 @@ body {
   font-family: 'Work Sans', sans-serif;
 }
 
-a {
+a,
+a:active {
   text-decoration: none;
+  color: black;
 }
 
 label {
@@ -169,13 +171,14 @@ form h3 {
   text-align: center;
 }
 
-#login-form {
+#login-form,
+#signup-form {
   display: none;
   position: fixed;
   align-items: center;
   justify-content: center;
   width: 320px;
-  height: 350px;
+  max-height: 500px;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
@@ -223,7 +226,12 @@ label {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  align-items: center;
+}
+
+.user-profile-body-left {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
 
 .user-profile-body img {

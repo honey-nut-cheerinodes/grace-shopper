@@ -1,9 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
-const App = () => {
+const App = props => {
   // load without nav background on main page
-
   window.addEventListener('load', () => {
     let editNavBar = document.getElementById('nav-bar')
     let editNavBarLinks = document.getElementsByTagName('a')
@@ -22,7 +21,11 @@ const App = () => {
       <div className="home-page">
         <h1>Classic Cuts</h1>
         <h2>Styles for every occassion</h2>
-        <button type="button" className="shop-btn">
+        <button
+          type="button"
+          className="shop-btn"
+          onClick={() => props.history.push('/products')}
+        >
           SHOP NOW
         </button>
       </div>

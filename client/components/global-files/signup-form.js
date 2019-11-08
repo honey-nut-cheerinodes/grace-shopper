@@ -3,12 +3,14 @@ import {connect} from 'react-redux'
 import {getUserLogin} from '../../store/user'
 import {Redirect} from 'react-router-dom'
 
-class LoginForm extends React.Component {
+class SignUpForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      firstName: '',
+      lastName: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -24,16 +26,21 @@ class LoginForm extends React.Component {
     evt.preventDefault()
     const email = this.state.email
     const password = this.state.password
-    this.props.getUserLogin('login', email, password)
+    const firstName = this.state.firstName
+    const lastName = this.state.lastName
+    this.props.getUserLogin('signup', email, password, firstName, lastName)
   }
 
   render() {
     return (
-      <form id="login-form">
+      <form id="signup-form">
         {/* <p>CLOSE</p> */}
-        <h2>Good to see you again.</h2>
-        <h3>Please log in.</h3>
+        <h2>New around town? Welcome!</h2>
         <br />
+        <label htmlFor="firstName">FIRST NAME: </label>
+        <input name="firstName" type="text" onChange={this.handleChange} />
+        <label htmlFor="lastName">LAST NAME: </label>
+        <input name="lastName" type="text" onChange={this.handleChange} />
         <label htmlFor="email">EMAIL ADDRESS: </label>
         <input name="email" type="text" onChange={this.handleChange} />
         <label htmlFor="password">PASSWORD: </label>
@@ -54,8 +61,8 @@ class LoginForm extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  getUserLogin: (method, email, password) =>
-    dispatch(getUserLogin(method, email, password))
+  getUserLogin: (method, email, password, firstName, lastName) =>
+    dispatch(getUserLogin(method, email, password, firstName, lastName))
 })
 
-export default connect(null, mapDispatchToProps)(LoginForm)
+export default connect(null, mapDispatchToProps)(SignUpForm)
