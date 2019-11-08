@@ -1,10 +1,10 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
 import './cart-item.css'
 
 export const CartItem = props => {
   console.log('props.item.price: ', props.item.price)
   // access this.props.cart.elem.products.item.price (elem from mapping over cart)
+  // put subtotal and total on local state or on store?
   return (
     <div>
       <hr />
