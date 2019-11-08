@@ -1,8 +1,7 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Product} = require('../server/db/models')
-const Checkout = require('../server/db/models/checkout')
+const {User, Product, Orders, OrderItems} = require('../server/db/models')
 
 async function seed() {
   await db.sync({force: true})
@@ -107,28 +106,41 @@ async function seed() {
     }
   ]
 
-  const checkoutItems = [
+  const orders = [
+    {
+      status: 'Ordered'
+    },
+    {
+      status: 'Fulfilled'
+    },
+    {
+      status: 'In cart'
+    },
+    {
+      status: 'In cart'
+    }
+  ]
+
+  const orderItems = [
     {
       quantity: 1,
-      status: 'Ordered',
-      orderId: 1000,
-      userId: 1
+      productId: 4,
+      orderId: 1
     },
     {
       quantity: 2,
-      status: 'Fulfilled',
-      orderId: 1001,
-      userId: 2
+      productId: 5,
+      orderId: 2
     },
     {
       quantity: 1,
-      status: 'In cart',
-      orderId: 1002
+      productId: 2,
+      orderId: 3
     },
     {
       quantity: 1,
-      status: 'Fulfilled',
-      orderId: 1003
+      productId: 7,
+      orderId: 4
     }
   ]
 
@@ -155,11 +167,18 @@ async function seed() {
   ])
 
   await Promise.all(
-    checkoutItems.map(item => {
-      return Checkout.create(item)
+    orders.map(order => {
+      return Orders.create(order)
     })
   )
-  console.log(`seeded ${checkoutItems.length} checkout`)
+
+  await Promise.all(
+    orderItems.map(item => {
+      return OrderItems.create(item)
+    })
+  )
+
+  console.log(`seeded ${orders.length} orders`)
   console.log(`seeded ${users.length} users`)
 
   console.log(`seeded successfully`)

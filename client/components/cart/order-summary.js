@@ -1,7 +1,7 @@
 import React from 'react'
 import './order-summary.css'
 
-const OrderSummary = props => {
+export const OrderSummary = props => {
   return (
     <div id="order-sum">
       <span className="order-sum-heading">
@@ -26,5 +26,3 @@ const OrderSummary = props => {
     </div>
   )
 }
-
-export default OrderSummary

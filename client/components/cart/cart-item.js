@@ -1,48 +1,51 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import './checkout-item.css'
+import './cart-item.css'
 
-const CheckoutItem = props => {
+export const CartItem = props => {
+  console.log('props.item.price: ', props.item.price)
+  // access this.props.cart.elem.products.item.price (elem from mapping over cart)
   return (
     <div>
       <hr />
       <div className="cart-line-item">
-        <img src={props.imageUrl} />
+        <img src={props.item.imageUrl} />
         <div className="item-info">
           <span className="item-info-top">
-            <Link to="/products">{props.name}</Link>
+            {props.item.name}
             <button
               type="button"
-              onClick={props.deleteItem}
+              onClick={props.item.deleteItem}
               className="delete-item-btn"
             >
-              x
+              X
             </button>
           </span>
+          <p>Size: One Size Fur All</p>
+          <br />
+          <br />
           <span className="item-info-bottom">
             <span className="item-quantity">
               <button
                 type="button"
-                onClick={props.removeOne}
+                onClick={props.item.removeOne}
                 className="remove-one-btn"
               >
                 -
               </button>
-              <p>{props.quantity}</p>
+              <p>{props.item.orderItems.quantity}</p>
               <button
                 type="button"
-                onClick={props.addOne}
+                onClick={props.item.addOne}
                 className="add-one-btn"
               >
                 +
               </button>
             </span>
-            <p>${props.price}</p>
+            <p>${props.item.price}</p>
           </span>
         </div>
       </div>
     </div>
   )
 }
-
-export default CheckoutItem

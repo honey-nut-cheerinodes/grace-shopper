@@ -4,7 +4,7 @@
 
 .order-sum-heading {
   display: flex;
-  align-content: center; /* not working */
+  align-items: center; /* not working */
   justify-content: space-evenly;
   background-color: #efeeee;
   height: 40px;
@@ -13,7 +13,7 @@
 
 .order-sum-body {
   display: flex;
-  align-content: center; /* not working */
+  align-items: center; /* not working */
   justify-content: space-between;
   background-color: #efeeee;
   border-top: 0.5px solid lightgray;

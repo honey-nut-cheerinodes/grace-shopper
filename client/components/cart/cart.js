@@ -1,22 +1,22 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-import CheckoutItem from './checkout-item'
-import OrderSummary from './order-summary'
+import {CartProducts} from './cart-products'
+import {OrderSummary} from './order-summary'
 import {connect} from 'react-redux'
-import {getCheckoutItems} from '../../store/checkout'
-import './checkout.css'
+import {getCart} from '../../store/cart'
+import './cart.css'
 
-class Checkout extends Component {
+class DisconnectedCart extends Component {
   // constructor(props) {
   //   super(props)
   //   this.addOne = this.addOne.bind(this)
   //   this.removeOne = this.removeOne.bind(this)
   //   this.deleteItem = this.deleteItem.bind(this)
-  //   this.addOne = this.addOne.bind(this)
+  //   this.checkout = this.checkout.bind(this)
   // }
 
   componentDidMount() {
-    this.props.getCheckoutItems()
+    this.props.getCart()
   }
 
   // addOne() {
@@ -40,11 +40,16 @@ class Checkout extends Component {
       <div id="checkout-body">
         <div id="cart">
           <Link to="/">← Back to Shopping</Link>
-          <hr />
-          {console.log('mapped checkout items: ', this.props.checkoutItems)}
-          <p>Dummy data here</p>
-          {(this.props.checkoutItems || []).map(item => {
-            return <CheckoutItem item={item} key={item.id} />
+          {(this.props.cart || []).map(elem => {
+            return (
+              <CartProducts
+                elem={elem}
+                key={elem.id}
+                addOne={this.addOne}
+                removeOne={this.removeOne}
+                deleteItem={this.deleteItem}
+              />
+            )
           })}
         </div>
         <div>
@@ -56,15 +61,15 @@ class Checkout extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log('mappedStateToProps: ', state)
   return {
-    checkoutItems: state.checkoutItems,
-    checkoutItem: state.checkoutItem
+    cart: state.cartReducer.cart
   }
 }
 
 const mapDispatchToProps = dispatch => ({
-  getCheckoutItems: () => dispatch(getCheckoutItems())
+  getCart: () => dispatch(getCart())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Checkout)
+const Cart = connect(mapStateToProps, mapDispatchToProps)(DisconnectedCart)
+
+export default Cart
