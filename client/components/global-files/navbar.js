@@ -26,10 +26,13 @@ const Navbar = () => {
           <Link to="/others">Other Pets</Link>
           <Link to="/products">All Products</Link>
         </div>
-        <div id="nav-logo">CLOAK & DOGGER</div>
+        <Link to="/" id="nav-logo">
+          CLOAK & DOGGER
+        </Link>
         <div className="nav-links">
+          {/* MADE CHANGES TO LOGIN & SIGN UP, NEED TO FIX!!! */}
           <Link onClick={showForm}>Log in</Link>
-          <Link to="/login">Sign up</Link>
+          <Link to="/sign-up">Sign up</Link>
           <Link to="/cart">Cart</Link>
         </div>
       </div>

@@ -1,11 +1,11 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
-import {Navbar, Footer, WelcomePage, AllProducts, errorPage} from './components'
+import {Navbar, Footer} from './components'
 import Routes from './routes'
-import {Link, Switch, Route} from 'react-router-dom'
-import userProfile from './components/user-profile'
-import SingleProduct from './components/products/single-product'
-import Cart from './components/cart/cart'
+// import userProfile from './components/user-profile'
+// import SingleProduct from './components/products/single-product'
+// import Checkout from './components/checkout/checkout'
 
 const App = () => {
   // to make changes to the nav bar whenever we scroll
@@ -25,8 +25,9 @@ const App = () => {
   return (
     <div>
       <Navbar />
+      <Routes />
 
-      <Switch>
+      {/* <Switch>
         <Route exact path="/" component={WelcomePage} />
         <Route exact path="/dogs" component={AllProducts} />
         <Route exact path="/cats" component={AllProducts} />
@@ -36,7 +37,7 @@ const App = () => {
         <Route exact path="/profile" component={userProfile} />
         <Route exact path="/cart" component={Cart} />
         <Route component={errorPage} />
-      </Switch>
+      </Switch> */}
 
       <Footer />
     </div>
