@@ -26,10 +26,15 @@ class UserProfile extends React.Component {
   }
 
   showForm = () => {
-    let hiddenForm = document.getElementById('login-form')
+    let hideLogin = document.getElementById('login-form')
+    let hideSignup = document.getElementById('signup-form')
 
-    if (hiddenForm.style.display === 'block') {
-      hiddenForm.style.display = 'none'
+    if (
+      hideLogin.style.display === 'block' ||
+      hideSignup.style.display === 'block'
+    ) {
+      hideLogin.style.display = 'none'
+      hideSignup.style.display = 'none'
     }
   }
 
@@ -37,7 +42,10 @@ class UserProfile extends React.Component {
     return (
       <div>
         <div className="user-profile-body" onLoad={this.showForm}>
-          <img src={this.state.imageUrl} />
+          <div className="user-profile-body-left">
+            <h1>Welcome, {this.props.firstName}!</h1> <p />
+            <img src={this.state.imageUrl} />
+          </div>
 
           <form className="update-profile">
             <h2> Edit profile information</h2>
@@ -70,7 +78,7 @@ class UserProfile extends React.Component {
               name="password"
               type="text"
               onChange={this.handleChange}
-              placeholder="NEED TO PUT PASSWORD FUNC HERE!"
+              placeholder="Enter updated password"
             />
 
             <button type="button" className="submit-btn">

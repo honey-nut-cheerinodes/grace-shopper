@@ -14,10 +14,6 @@ class LoginForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  componentDidMount() {
-    this.props.getUserLogin()
-  }
-
   handleChange(event) {
     const changeInput = event.target.name
     const input = event.target.value
@@ -28,9 +24,7 @@ class LoginForm extends React.Component {
     evt.preventDefault()
     const email = this.state.email
     const password = this.state.password
-    this.props.getUserLogin(email, password)
-
-    this.setState({email: ''})
+    this.props.getUserLogin('login', email, password)
   }
 
   render() {
@@ -60,7 +54,8 @@ class LoginForm extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  getUserLogin: (email, password) => dispatch(getUserLogin(email, password))
+  getUserLogin: (method, email, password) =>
+    dispatch(getUserLogin(method, email, password))
 })
 
 export default connect(null, mapDispatchToProps)(LoginForm)

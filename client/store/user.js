@@ -22,18 +22,29 @@ export const me = () => async dispatch => {
   }
 }
 
-export const getUserLogin = (email, password) => async dispatch => {
+export const getUserLogin = (
+  method,
+  email,
+  password,
+  firstName,
+  lastName
+) => async dispatch => {
   try {
-    if (email && password) {
-      let res = await axios.post('/auth/login', {email, password})
+    let res
 
-      // this basically says it will dispatch data to the store and will redirect to the profile page
-      let dispatchTrial = dispatch(getUser(res.data))
-      // console.log(res.data)
-      if (dispatchTrial) history.push('/profile')
+    if (method === 'login')
+      res = await axios.post('/auth/login', {email, password})
+    else if (method === 'signup')
+      res = await axios.post('auth/signup', {
+        email,
+        password,
+        firstName,
+        lastName
+      })
 
-      // console.log('should have posted')
-    }
+    // this basically says it will dispatch data to the store and will redirect to the profile page
+    let dispatchTrial = dispatch(getUser(res.data))
+    if (dispatchTrial) history.push('/profile')
   } catch (err) {
     console.log('there was an error')
     return dispatch(getUser({error: err}))
@@ -54,8 +65,6 @@ export const logout = () => async dispatch => {
 export default function(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
-      // console.log('state from reducer', action.user)
-      // return {state: action.user}
       return action.user
     case REMOVE_USER:
       return defaultUser
@@ -63,39 +72,3 @@ export default function(state = defaultUser, action) {
       return state
   }
 }
-
-// PREVIOUS CODE BELOW -----
-
-// export const me = () => async dispatch => {
-//   try {
-//     const res = await axios.get('/auth/me')
-//     dispatch(getUser(res.data || {}))
-//   } catch (err) {
-//     console.error(err)
-//   }
-// }
-
-// export const auth = (email, password, method) => async dispatch => {
-//   try {
-//     let res = await axios.post(`/auth/${method}`, {email, password})
-//   } catch (authError) {
-//     return dispatch(getUser({error: authError}))
-//   }
-
-//   try {
-//     dispatch(getUser(res.data))
-//     history.push('/home')
-//   } catch (dispatchOrHistoryErr) {
-//     console.error(dispatchOrHistoryErr)
-//   }
-// }
-
-// export const logout = () => async dispatch => {
-//   try {
-//     await axios.post('/auth/logout')
-//     dispatch(removeUser())
-//     history.push('/login')
-//   } catch (err) {
-//     console.error(err)
-//   }
-// }

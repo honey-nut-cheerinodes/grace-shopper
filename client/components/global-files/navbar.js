@@ -55,8 +55,10 @@ class Navbar extends React.Component {
               </Link>
             ) : (
               <span>
-                <Link onClick={() => this.showForm('login')}>Log in</Link>
-                <Link to="/sign-up" onClick={() => this.showForm('signup')}>
+                <Link to="#" onClick={() => this.showForm('login')}>
+                  Log in
+                </Link>
+                <Link to="#" onClick={() => this.showForm('signup')}>
                   Sign up
                 </Link>
               </span>
@@ -87,7 +89,6 @@ export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
 
 // Proptypes
 Navbar.propTypes = {
-  handleClick: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired
 }
 

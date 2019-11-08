@@ -8,14 +8,12 @@ class SignUpForm extends React.Component {
     super(props)
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      firstName: '',
+      lastName: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-  componentDidMount() {
-    this.props.getUserLogin()
   }
 
   handleChange(event) {
@@ -28,9 +26,9 @@ class SignUpForm extends React.Component {
     evt.preventDefault()
     const email = this.state.email
     const password = this.state.password
-    this.props.getUserLogin(email, password)
-
-    this.setState({email: ''})
+    const firstName = this.state.firstName
+    const lastName = this.state.lastName
+    this.props.getUserLogin('signup', email, password, firstName, lastName)
   }
 
   render() {
@@ -63,7 +61,8 @@ class SignUpForm extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  getUserLogin: (email, password) => dispatch(getUserLogin(email, password))
+  getUserLogin: (method, email, password, firstName, lastName) =>
+    dispatch(getUserLogin(method, email, password, firstName, lastName))
 })
 
 export default connect(null, mapDispatchToProps)(SignUpForm)
