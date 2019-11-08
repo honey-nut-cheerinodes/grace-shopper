@@ -40,6 +40,16 @@ export const getUserLogin = (email, password) => async dispatch => {
   }
 }
 
+export const logout = () => async dispatch => {
+  try {
+    await axios.post('/auth/logout')
+    dispatch(removeUser())
+    history.push('/login')
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 // reducer
 export default function(state = defaultUser, action) {
   switch (action.type) {
