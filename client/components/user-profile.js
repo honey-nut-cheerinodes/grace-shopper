@@ -82,10 +82,3 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps)(UserProfile)
-
-// const mapStateToProps = state => {
-//   // console.log('from profile-page', state.user)
-//   return {
-//     email: state.user
-//   }
-// }
