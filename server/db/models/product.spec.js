@@ -22,7 +22,7 @@ describe('Product model', () => {
     name: 'sweatshirt',
     price: '399',
     description:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      'This Supreme hoodie is the ultimate cozy experience for your cat.  The luxurious sherpa lining takes the coziness to the next level by decking our your pooch in the softest mix of cozy sherpa and marled fleece.',
     imageUrl:
       'https://peopledotcom.files.wordpress.com/2018/04/zappa-the-cat-3.jpg',
     type: 'cat'
@@ -48,5 +48,10 @@ describe('Product model', () => {
     if (result) throw Error('validation should fail when content is null')
 
     expect(error).to.be.an.instanceOf(Error)
+  })
+
+  it('checks for null', function() {
+    var product = null
+    should.not.exist(product)
   })
 })
