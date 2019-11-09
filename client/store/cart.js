@@ -36,7 +36,11 @@ export const gotCart = cart => ({
 // thunk creators and thunks
 export const getCart = () => async dispatch => {
   const {data} = await axios.get('/api/cart')
-  dispatch(gotCart(data))
+  let prods = []
+  data.forEach(item => {
+    prods.push(item.products[0])
+  })
+  dispatch(gotCart(prods))
 }
 
 // initial state

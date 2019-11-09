@@ -2,20 +2,20 @@ import React from 'react'
 import './cart-item.css'
 
 export const CartItem = props => {
-  console.log('props.item.price: ', props.item.price)
+  const item = props.elem
   // access this.props.cart.elem.products.item.price (elem from mapping over cart)
   // put subtotal and total on local state or on store?
   return (
     <div>
       <hr />
       <div className="cart-line-item">
-        <img src={props.item.imageUrl} />
+        <img src={item.imageUrl} />
         <div className="item-info">
           <span className="item-info-top">
-            {props.item.name}
+            {item.name}
             <button
               type="button"
-              onClick={props.item.deleteItem}
+              onClick={item.deleteItem}
               className="delete-item-btn"
             >
               X
@@ -28,21 +28,21 @@ export const CartItem = props => {
             <span className="item-quantity">
               <button
                 type="button"
-                onClick={props.item.removeOne}
+                onClick={item.removeOne}
                 className="remove-one-btn"
               >
                 -
               </button>
-              <p>{props.item.orderItems.quantity}</p>
+              <p>{item.quantity}</p>
               <button
                 type="button"
-                onClick={props.item.addOne}
+                onClick={item.addOne}
                 className="add-one-btn"
               >
                 +
               </button>
             </span>
-            <p>${props.item.price}</p>
+            <p>${item.price}</p>
           </span>
         </div>
       </div>
