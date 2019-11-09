@@ -41,7 +41,7 @@ router.post('/', (req, res) => {
     if (err) {
       console.error(err)
     }
-    res.json(req.session.cart)
+    res.json(items)
   })
 
   // We probably want to redirect afterwards

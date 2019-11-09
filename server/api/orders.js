@@ -7,13 +7,22 @@ router.use('/guest', require('./guest-checkout'))
 router.get('/', async (req, res, next) => {
   try {
     // const cart = await Orders.findAll({where: {status: 'In cart'}})
+
     const cart = await Orders.findAll({
-      include: [{model: Product, through: 'orders'}],
-      where: {status: 'In cart'}
+      include: [
+        {
+          model: Product,
+          through: 'orders',
+          attributes: ['id', 'name', 'price', 'imageUrl']
+        }
+      ],
+      where: {status: 'In cart'},
+      attributes: ['id']
     })
+
     // i'm not filtering properly thru each user's current order....this is just pulling up ALL orders that have status in cart regardless of that order's user.
     // console.log('cart: ', cart)
-    res.send(cart)
+    res.json(cart)
   } catch (error) {
     next(error)
   }
