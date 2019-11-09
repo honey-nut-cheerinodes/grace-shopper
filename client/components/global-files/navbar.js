@@ -17,17 +17,13 @@ class Navbar extends React.Component {
   showForm = action => {
     let hiddenForm
 
-    if (action === 'login') {
-      hiddenForm = document.getElementById('login-form')
-    } else {
-      hiddenForm = document.getElementById('signup-form')
-    }
+    action === 'login'
+      ? (hiddenForm = document.getElementById('login-form'))
+      : (hiddenForm = document.getElementById('signup-form'))
 
-    if (hiddenForm.style.display === 'block') {
-      hiddenForm.style.display = 'none'
-    } else {
-      hiddenForm.style.display = 'block'
-    }
+    hiddenForm.style.display === 'block'
+      ? (hiddenForm.style.display = 'none')
+      : (hiddenForm.style.display = 'block')
   }
 
   handleClick = () => {
@@ -47,12 +43,17 @@ class Navbar extends React.Component {
           <Link to="/" id="nav-logo">
             CLOAK & DOGGER
           </Link>
-          <div className="nav-links">
+          <div className="nav-links-right">
             {/* MADE CHANGES TO LOGIN & SIGN UP, NEED TO FIX!!! */}
             {this.props.isLoggedIn ? (
-              <Link to="/" onClick={this.handleClick}>
-                Log out
-              </Link>
+              <span>
+                <Link to="/profile" onClick={() => this.showForm('login')}>
+                  Profile
+                </Link>
+                <Link to="/" onClick={this.handleClick}>
+                  Log out
+                </Link>
+              </span>
             ) : (
               <span>
                 <Link to="#" onClick={() => this.showForm('login')}>
@@ -87,52 +88,7 @@ const mapDispatchToProps = dispatch => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
 
-// Proptypes
+// Prop types
 Navbar.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired
 }
-
-// export default Navbar
-
-// const Navbar = ({handleClick, isLoggedIn}) => (
-//   <div>
-//     <h1>BOILERMAKER</h1>
-//     <nav>
-//       {isLoggedIn ? (
-//         <div>
-//           {/* The navbar will show these links after you log in */}
-//           <Link to="/home">Home</Link>
-//           <a href="#" onClick={handleClick}>
-//             Logout
-//           </a>
-//         </div>
-//       ) : (
-//         <div>
-//           {/* The navbar will show these links before you log in */}
-//           <Link to="/login">Login</Link>
-//           <Link to="/signup">Sign Up</Link>
-//         </div>
-//       )}
-//     </nav>
-//     <hr />
-//   </div>
-// )
-
-// /**
-//  * CONTAINER
-//  */
-// const mapState = state => {
-//   return {
-//     isLoggedIn: !!state.user.id
-//   }
-// }
-
-// const mapDispatch = dispatch => {
-//   return {
-//     handleClick() {
-//       dispatch(logout())
-//     }
-//   }
-// }
-
-// export default connect(mapState, mapDispatch)(Navbar)

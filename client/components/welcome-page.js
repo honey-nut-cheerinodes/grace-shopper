@@ -42,6 +42,7 @@ const App = props => {
           <img
             className="shop-now-img"
             src="https://cdn.shopify.com/s/files/1/1323/0731/products/UAC0086BK91-Front_BARBOUR_LIDDESDALE_DOG_COAT_2048x2048.jpg?v=1527191069"
+            onClick={() => props.history.push('/dogs')}
           />
           <Link to="/dogs">
             The Essentials
@@ -52,6 +53,7 @@ const App = props => {
           <img
             className="shop-now-img"
             src="https://i.pinimg.com/originals/81/42/8e/81428e6fc23a0e62a128050656eb5af1.jpg"
+            onClick={() => props.history.push('/cats')}
           />
           <Link to="/cats">
             Cat Collection
@@ -62,6 +64,7 @@ const App = props => {
           <img
             className="shop-now-img"
             src="https://live.staticflickr.com/8519/8548033974_0b9bb28560_b.jpg"
+            onClick={() => props.history.push('/others')}
           />
           <Link to="/others">
             Styles for Other Pets
