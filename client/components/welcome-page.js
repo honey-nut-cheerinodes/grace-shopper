@@ -6,9 +6,11 @@ const App = props => {
   window.addEventListener('load', () => {
     let editNavBar = document.getElementById('nav-bar')
     let editNavBarLinks = document.getElementsByTagName('a')
+    let editCart = document.getElementById('shopping-cart')
 
     editNavBar.style.color = 'white'
     editNavBar.style.background = 'none'
+    editCart.style.borderColor = 'white'
 
     for (let i = 0; i < editNavBarLinks.length; i++) {
       editNavBarLinks[i].style.color = 'white'

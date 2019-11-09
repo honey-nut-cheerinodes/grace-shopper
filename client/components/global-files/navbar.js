@@ -33,6 +33,12 @@ class Navbar extends React.Component {
   render() {
     return (
       <React.Fragment>
+        {/* style sheet for shopping bag icon */}
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+
         <div id="nav-bar">
           <div className="nav-links">
             <Link to="/dogs">Dogs</Link>
@@ -44,7 +50,6 @@ class Navbar extends React.Component {
             CLOAK & DOGGER
           </Link>
           <div className="nav-links-right">
-            {/* MADE CHANGES TO LOGIN & SIGN UP, NEED TO FIX!!! */}
             {this.props.isLoggedIn ? (
               <span>
                 <Link to="/profile" onClick={() => this.showForm('login')}>
@@ -64,7 +69,12 @@ class Navbar extends React.Component {
                 </Link>
               </span>
             )}
-            <Link to="/cart">Cart</Link>
+            {/* <Link to="/cart">Cart</Link> */}
+            <Link
+              to="/cart"
+              className="fa fa-shopping-bag"
+              id="shopping-cart"
+            />
           </div>
         </div>
         <LoginForm />
@@ -92,3 +102,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
 Navbar.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired
 }
+
+// other options for shoppig bag icon
+// fa fa-shopping-cart
+// fa fa-shopping-basket

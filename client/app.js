@@ -8,10 +8,12 @@ const App = () => {
   window.addEventListener('scroll', () => {
     let editNavBar = document.getElementById('nav-bar')
     let editNavBarLinks = document.getElementsByTagName('a')
+    let editCart = document.getElementById('shopping-cart')
 
     editNavBar.style.color = 'black'
     editNavBar.style.background = 'white'
     editNavBar.style.opacity = 0.95
+    editCart.style.borderColor = 'black'
 
     for (let i = 0; i < editNavBarLinks.length; i++) {
       editNavBarLinks[i].style.color = 'black'
