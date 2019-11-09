@@ -18,20 +18,35 @@ describe('Product model', () => {
     return db.sync({force: true})
   })
 
-  it('should have property `name`', function() {
-    let product = {name: 'sweatshirt'}
+  const product = {
+    name: 'sweatshirt',
+    price: '399',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    imageUrl:
+      'https://peopledotcom.files.wordpress.com/2018/04/zappa-the-cat-3.jpg',
+    type: 'cat'
+  }
 
+  it('should have property `name`', function() {
     product.should.have.property('name').equal('sweatshirt')
   })
 
   it('should have property `price`', function() {
-    let product = {price: '399'}
-
     product.should.have.property('price').equal('399')
   })
 
-  it('checks for null', function() {
-    var product = null
-    should.not.exist(product)
+  it('requires a description and imageUrl', async () => {
+    product.description = null
+    let result, error
+    try {
+      result = await product.validate()
+    } catch (err) {
+      error = err
+    }
+
+    if (result) throw Error('validation should fail when content is null')
+
+    expect(error).to.be.an.instanceOf(Error)
   })
 })
