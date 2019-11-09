@@ -47,7 +47,11 @@ class LoginForm extends React.Component {
         >
           CONTINUE
         </button>
-        <h5>* All fields must be completed to submit form.</h5>
+        <h5>* All fields must be completed to submit form. </h5>
+        <h4>OR</h4>
+        <button type="submit" className="google-btn" formAction="/auth/google">
+          LOGIN WITH GOOGLE
+        </button>
       </form>
     )
   }

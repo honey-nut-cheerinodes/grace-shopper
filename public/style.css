@@ -41,7 +41,7 @@ form div {
 .home-page h2 {
   margin-top: -50px;
 }
-/* .shop-btn, .submit-btn { */
+
 button {
   margin-top: 15px;
   padding: 15px 25px;
@@ -189,7 +189,8 @@ input {
 label {
   text-align: left;
 }
-.submit-btn {
+.submit-btn,
+.google-btn {
   background-color: darkslategray;
   border: 1px solid darkslategray;
   color: white;
@@ -203,6 +204,15 @@ label {
   background-color: grey;
   border: 1px solid grey;
 }
+
+#login-form h4 {
+  text-align: center;
+}
+
+.google-btn {
+  margin-top: 0px;
+}
+
 .user-profile-body {
   margin: 150px 20% 75px 15%;
   display: flex;
