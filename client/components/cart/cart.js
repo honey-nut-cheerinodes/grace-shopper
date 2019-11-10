@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-import {CartProducts} from './cart-products'
+import {CartItem} from './cart-item'
 import {OrderSummary} from './order-summary'
 import {connect} from 'react-redux'
 import {getCart} from '../../store/cart'
+import {getSessionItems} from '../../store/guest-checkout'
 import './cart.css'
 
 class DisconnectedCart extends Component {
@@ -17,6 +18,7 @@ class DisconnectedCart extends Component {
 
   componentDidMount() {
     this.props.getCart()
+    this.props.getSessionCart()
   }
 
   // addOne() {
@@ -36,13 +38,24 @@ class DisconnectedCart extends Component {
   // }
 
   render() {
+    // Seeing if someone has information in their cart, if so THAT takes priority. If not, check if they have session cart information, if so serve that. If nothing, serve an empty cart
+    let cart
+
+    // THIS IS FOR CHECKING IF THERE'S A USER CART OR A GUEST SESSION CART,
+    // COMMENTED FOR NOW TO FORCE THE SESSION CART
+    // if (this.props.cart.length > 0) {
+    //   cart = this.props.cart
+    // } else if (this.props.sessionCart.length > 0) {
+    cart = this.props.sessionCart
+    // }
+
     return (
       <div id="checkout-body">
         <div id="cart">
           <Link to="/">← Back to Shopping</Link>
-          {(this.props.cart || []).map(elem => {
+          {(cart || []).map(elem => {
             return (
-              <CartProducts
+              <CartItem
                 elem={elem}
                 key={elem.id}
                 addOne={this.addOne}
@@ -60,14 +73,14 @@ class DisconnectedCart extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    cart: state.cartReducer.cart
-  }
-}
+const mapStateToProps = state => ({
+  cart: state.cartReducer.cart,
+  sessionCart: state.guestCheckout.products
+})
 
 const mapDispatchToProps = dispatch => ({
-  getCart: () => dispatch(getCart())
+  getCart: () => dispatch(getCart()),
+  getSessionCart: () => dispatch(getSessionItems())
 })
 
 const Cart = connect(mapStateToProps, mapDispatchToProps)(DisconnectedCart)

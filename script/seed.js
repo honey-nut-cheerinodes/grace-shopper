@@ -117,11 +117,12 @@ async function seed() {
       type: 'cat'
     },
     {
-      name: 'Traditional Hanbok Ceremonial Outfit',
+      name: 'Traditional Hanbok Outfit',
       price: 777,
-      description: 'Luxury hanbok ceremonial outfit for your bunny.',
+      description:
+        'Luxury traditional hanbok ceremonial outfit for your bunny.',
       imageUrl:
-        'https://i.pinimg.com/originals/81/42/8e/81428e6fc23a0e62a128050656eb5af1.jpg',
+        'https://live.staticflickr.com/8519/8548033974_0b9bb28560_b.jpg',
       type: 'cat'
     },
     {

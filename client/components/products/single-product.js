@@ -22,7 +22,13 @@ class SingleProduct extends React.Component {
   handleAdd() {
     const product = this.props.product.product
     const newProduct = [
-      {productId: product.id, item: product.name, quantity: 1}
+      {
+        productId: product.id,
+        item: product.name,
+        imageUrl: product.imageUrl,
+        price: product.price,
+        quantity: 1
+      }
     ]
     this.props.addItem(newProduct)
   }
