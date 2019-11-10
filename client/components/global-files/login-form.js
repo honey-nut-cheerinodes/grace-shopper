@@ -1,15 +1,17 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getUserLogin} from '../../store/user'
-import {Redirect} from 'react-router-dom'
+
+const defaultState = {
+  email: '',
+  password: '',
+  errorMessage: ''
+}
 
 class LoginForm extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      email: '',
-      password: ''
-    }
+    this.state = defaultState
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -20,11 +22,13 @@ class LoginForm extends React.Component {
     this.setState({[changeInput]: input})
   }
 
-  handleSubmit(evt) {
-    evt.preventDefault()
+  handleSubmit(event) {
+    event.preventDefault()
     const email = this.state.email
     const password = this.state.password
     this.props.getUserLogin('login', email, password)
+
+    this.setState(defaultState)
   }
 
   render() {
@@ -35,9 +39,19 @@ class LoginForm extends React.Component {
         <h3>Please log in.</h3>
         <br />
         <label htmlFor="email">EMAIL ADDRESS: </label>
-        <input name="email" type="text" onChange={this.handleChange} />
+        <input
+          name="email"
+          type="text"
+          onChange={this.handleChange}
+          value={this.state.email}
+        />
         <label htmlFor="password">PASSWORD: </label>
-        <input name="password" type="text" onChange={this.handleChange} />{' '}
+        <input
+          name="password"
+          type="text"
+          onChange={this.handleChange}
+          value={this.state.password}
+        />{' '}
         <br />
         <button
           type="button"

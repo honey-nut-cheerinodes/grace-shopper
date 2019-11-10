@@ -5,10 +5,6 @@ import {connect} from 'react-redux'
 class UserProfile extends React.Component {
   constructor() {
     super()
-    this.state = {
-      imageUrl:
-        'https://66.media.tumblr.com/c6434ca12fe7d26aecea612f686e23f1/tumblr_pp0zcqQ2OT1r4x5j7o1_400.jpg'
-    }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.showForm = this.showForm.bind(this)
@@ -44,7 +40,7 @@ class UserProfile extends React.Component {
         <div className="user-profile-body" onLoad={this.showForm}>
           <div className="user-profile-body-left">
             <h1>Welcome, {this.props.firstName}!</h1> <p />
-            <img src={this.state.imageUrl} />
+            <img src={this.props.imageUrl} />
           </div>
 
           <form className="update-profile">
@@ -82,8 +78,7 @@ class UserProfile extends React.Component {
             />
 
             <button type="button" className="submit-btn">
-              {' '}
-              Update Info{' '}
+              UPDATE INFO
             </button>
           </form>
         </div>
@@ -95,7 +90,8 @@ class UserProfile extends React.Component {
 const mapStateToProps = state => ({
   firstName: state.user.firstName,
   lastName: state.user.lastName,
-  email: state.user.email
+  email: state.user.email,
+  imageUrl: state.user.imageUrl
 })
 
 export default connect(mapStateToProps)(UserProfile)
