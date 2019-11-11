@@ -15,7 +15,7 @@ describe('User model', () => {
     lastName: 'ThePug',
     imageUrl:
       'https://images.ctfassets.net/oxjq45e8ilak/2TGv5KhlzHxWNVtNyseaEY/f4f2108d1340fbeb2a57cf3c2d363bf0/MicrosoftTeams-image__1_.png',
-    password: 'ca69ad65f3f75025ce78afcf5aa88440e71fd29c9a93975d374716ae20909026'
+    password: '123'
   }
 
   it('should have property `email`', function() {
@@ -28,9 +28,7 @@ describe('User model', () => {
   })
 
   it('should have property `password`', function() {
-    user.should.have
-      .property('password')
-      .equal('ca69ad65f3f75025ce78afcf5aa88440e71fd29c9a93975d374716ae20909026')
+    user.should.have.property('password').equal('123')
   })
 
   it('checks for null', function() {
