@@ -35,7 +35,7 @@ export const removedItem = item => ({
 
 // thunk creators and thunks
 export const getCart = () => async dispatch => {
-  const {data} = await axios.get('/api/cart/')
+  const {data} = await axios.get('/api/cart')
   let prods = []
   data.forEach(item => {
     prods.push(item.products[0])
@@ -44,28 +44,28 @@ export const getCart = () => async dispatch => {
 }
 
 export const addItem = item => async dispatch => {
-  const {data} = await axios.post('/api/cart/', item)
+  const {data} = await axios.post('/api/cart', item)
   dispatch(addedItem(data))
 }
 
 export const increase = item => async dispatch => {
   item.quantity++
-  const {data} = await axios.put('/api/cart/', item)
+  const {data} = await axios.put('/api/cart', item)
   dispatch(increased(data))
 }
 
 export const decrease = item => async dispatch => {
   item.quantity--
   if (item.quantity === 0) {
-    await axios.delete('/api/cart/', item)
+    await axios.delete('/api/cart', item)
     dispatch(removedItem(item))
   }
-  const {data} = await axios.put('/api/cart/', item)
+  const {data} = await axios.put('/api/cart', item)
   dispatch(decreased(data))
 }
 
 export const removeItem = item => async dispatch => {
-  await axios.delete('/api/cart/', item)
+  await axios.delete('/api/cart', item)
   dispatch(removedItem(item))
 }
 
@@ -95,6 +95,7 @@ const cartReducer = (state = initialState, action) => {
           })
         ]
       }
+    // don't have to spread it again; be space-conscious. see what can be used instead of filter
     default:
       return state
   }

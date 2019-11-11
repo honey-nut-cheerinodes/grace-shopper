@@ -33,12 +33,8 @@ class DisconnectedCart extends Component {
   }
 
   render() {
-    console.log('this.props.cart: ', this.props.cart)
-    // Seeing if someone has information in their cart, if so THAT takes priority. If not, check if they have session cart information, if so serve that. If nothing, serve an empty cart
     let cart
 
-    // THIS IS FOR CHECKING IF THERE'S A USER CART OR A GUEST SESSION CART,
-    // COMMENTED FOR NOW TO FORCE THE SESSION CART
     if (this.props.cart.length > 0) {
       cart = this.props.cart
     } else if (this.props.sessionCart.length > 0) {

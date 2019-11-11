@@ -3,7 +3,7 @@ import './cart-item.css'
 
 export const CartItem = props => {
   const item = props.item
-  // put subtotal and total on local state or on store?
+
   return (
     <div>
       <hr />

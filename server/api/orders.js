@@ -4,15 +4,17 @@ const Product = require('../db/models/product')
 const OrderItems = require('../db/models/orderItems')
 
 const isLoggedIn = (req, res, next) => {
-  try {
-    if (req.user) next()
-    // res.status(403).send('We coudn\'t find your account. Try logging in again.')
-  } catch (error) {
-    next(error)
-  }
+  //   try {
+  //     if (req.user) next()
+  //     // res.status(403).send('We coudn\'t find your account. Try logging in again.')
+  //   } catch (error) {
+  //     next(error)
+  //   }
+  next()
 }
 
 router.get('/', isLoggedIn, async (req, res, next) => {
+  console.log('req.session: ', req.session)
   try {
     const cart = await Orders.findOne({
       include: [
@@ -56,22 +58,8 @@ router.post('/', isLoggedIn, async (req, res, next) => {
         }
       })
       await newCart.save()
-      const newCartItem = await OrderItems.create(itemToAdd, {
-        include: [
-          // is this necessary for accessing this particular cart or can i skip to line 69?
-          {
-            model: Orders,
-            where: {
-              id: newCart.id
-            }
-          }
-        ],
-        where: {
-          productId: itemToAdd.id,
-          quantity: 1,
-          orderId: newCart.id
-        }
-      })
+      const newCartItem = await OrderItems.create(itemToAdd)
+      newCartItem.orderId = newCart.id
       await newCartItem.save(error => {
         if (error) {
           console.error(error)
@@ -79,22 +67,8 @@ router.post('/', isLoggedIn, async (req, res, next) => {
         res.json(newCartItem)
       })
     }
-    const currentCartItem = await OrderItems.create(itemToAdd, {
-      include: [
-        // is this necessary for accessing this particular cart or can i skip to line 91?
-        {
-          model: Orders,
-          where: {
-            id: cart.id
-          }
-        }
-      ],
-      where: {
-        productId: itemToAdd.id,
-        quantity: 1,
-        orderId: cart.id
-      }
-    })
+    const currentCartItem = await OrderItems.create(itemToAdd)
+    currentCartItem.orderId = cart.id
     await currentCartItem.save(error => {
       if (error) {
         console.error(error)
@@ -109,19 +83,19 @@ router.post('/', isLoggedIn, async (req, res, next) => {
 router.put('/', isLoggedIn, async (req, res, next) => {
   try {
     const itemToUpdate = req.body
-    const cart = await Orders.findOne({
-      where: {
-        status: 'In cart',
-        userId: req.user.id
-      },
-      attributes: ['userId']
-    })
     const item = await OrderItems.findOne({
       where: {
-        productId: itemToUpdate.id,
-        orderId: cart.id
+        productId: itemToUpdate.id
       },
-      attributes: ['productId', 'orderId']
+      include: [
+        {
+          model: Orders,
+          where: {
+            status: 'In cart',
+            userId: req.user.id
+          }
+        }
+      ]
     })
     if (!item) {
       let error = new Error("We couldn't find this item in your cart.")
@@ -139,12 +113,13 @@ router.put('/', isLoggedIn, async (req, res, next) => {
   }
 })
 
+// only pass back quantity to the frontend for security purposes
+
 router.delete('/', isLoggedIn, async (req, res, next) => {
   try {
     const itemToDelete = req.body
     const item = await OrderItems.findOne({
       include: [
-        // does this accomplish the same thing as first finding the cart and then finding the cart item via cart.id? (see PUT)
         {
           model: Orders,
           where: {
@@ -156,8 +131,7 @@ router.delete('/', isLoggedIn, async (req, res, next) => {
       ],
       where: {
         productId: itemToDelete.id
-      },
-      attributes: ['productId']
+      }
     })
     if (!item) {
       let error = new Error("We couldn't find this item in your cart.")
