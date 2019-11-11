@@ -1,41 +1,174 @@
 const router = require('express').Router()
 const Orders = require('../db/models/orders')
 const Product = require('../db/models/product')
+const OrderItems = require('../db/models/orderItems')
 
-router.use('/guest', require('./guest-checkout'))
-
-router.get('/', async (req, res, next) => {
+const isLoggedIn = (req, res, next) => {
   try {
-    // const cart = await Orders.findAll({where: {status: 'In cart'}})
+    if (req.user) next()
+    // res.status(403).send('We coudn\'t find your account. Try logging in again.')
+  } catch (error) {
+    next(error)
+  }
+}
 
-    const cart = await Orders.findAll({
+router.get('/', isLoggedIn, async (req, res, next) => {
+  try {
+    const cart = await Orders.findOne({
       include: [
         {
           model: Product,
-          through: 'orders',
+          through: 'orderItems',
           attributes: ['id', 'name', 'price', 'imageUrl']
         }
       ],
-      where: {status: 'In cart'},
-      attributes: ['id']
+      where: {
+        status: 'In cart',
+        userId: req.user.id
+      },
+      attributes: ['id', 'userId']
     })
-
-    // i'm not filtering properly thru each user's current order....this is just pulling up ALL orders that have status in cart regardless of that order's user.
-    // console.log('cart: ', cart)
-    res.json(cart)
+    if (!cart) {
+      let error = new Error('Your cart is empty.')
+      next(error)
+    } else {
+      res.json(cart)
+    }
   } catch (error) {
     next(error)
   }
 })
 
-// router.put('/', async (req, res, next) => {
+router.post('/', isLoggedIn, async (req, res, next) => {
+  try {
+    const itemToAdd = req.body
+    const cart = await Orders.findOne({
+      where: {
+        status: 'In cart',
+        userId: req.user.id
+      }
+    })
+    if (!cart) {
+      const newCart = await Orders.create({
+        where: {
+          status: 'In cart',
+          userId: req.user.id
+        }
+      })
+      await newCart.save()
+      const newCartItem = await OrderItems.create(itemToAdd, {
+        include: [
+          // is this necessary for accessing this particular cart or can i skip to line 69?
+          {
+            model: Orders,
+            where: {
+              id: newCart.id
+            }
+          }
+        ],
+        where: {
+          productId: itemToAdd.id,
+          quantity: 1,
+          orderId: newCart.id
+        }
+      })
+      await newCartItem.save(error => {
+        if (error) {
+          console.error(error)
+        }
+        res.json(newCartItem)
+      })
+    }
+    const currentCartItem = await OrderItems.create(itemToAdd, {
+      include: [
+        // is this necessary for accessing this particular cart or can i skip to line 91?
+        {
+          model: Orders,
+          where: {
+            id: cart.id
+          }
+        }
+      ],
+      where: {
+        productId: itemToAdd.id,
+        quantity: 1,
+        orderId: cart.id
+      }
+    })
+    await currentCartItem.save(error => {
+      if (error) {
+        console.error(error)
+      }
+      res.json(currentCartItem)
+    })
+  } catch (error) {
+    next(error)
+  }
+})
 
-// })
+router.put('/', isLoggedIn, async (req, res, next) => {
+  try {
+    const itemToUpdate = req.body
+    const cart = await Orders.findOne({
+      where: {
+        status: 'In cart',
+        userId: req.user.id
+      },
+      attributes: ['userId']
+    })
+    const item = await OrderItems.findOne({
+      where: {
+        productId: itemToUpdate.id,
+        orderId: cart.id
+      },
+      attributes: ['productId', 'orderId']
+    })
+    if (!item) {
+      let error = new Error("We couldn't find this item in your cart.")
+      next(error)
+    }
+    const updatedItem = await item.update(itemToUpdate)
+    await updatedItem.save(error => {
+      if (error) {
+        console.error(error)
+      }
+      res.json(updatedItem)
+    })
+  } catch (error) {
+    next(error)
+  }
+})
 
-// router.delete('/', async (req, res, next) => {
+router.delete('/', isLoggedIn, async (req, res, next) => {
+  try {
+    const itemToDelete = req.body
+    const item = await OrderItems.findOne({
+      include: [
+        // does this accomplish the same thing as first finding the cart and then finding the cart item via cart.id? (see PUT)
+        {
+          model: Orders,
+          where: {
+            status: 'In cart',
+            userId: req.user.id
+          },
+          attributes: ['status', 'userId']
+        }
+      ],
+      where: {
+        productId: itemToDelete.id
+      },
+      attributes: ['productId']
+    })
+    if (!item) {
+      let error = new Error("We couldn't find this item in your cart.")
+      next(error)
+    }
+    await item.destroy()
+  } catch (error) {
+    next(error)
+  }
+})
 
-// })
+router.use('*', require('./guest-checkout'))
 
 module.exports = router
-
-// {include: [{model: Product}], where: {status: 'In cart'}})

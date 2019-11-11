@@ -35,7 +35,7 @@ img {
   align-items: center;
 }
 
-.delete-item-btn {
+.remove-item-btn {
   color: gray;
   border: 0px;
   margin: 0px;
@@ -43,7 +43,7 @@ img {
   background-color: transparent;
 }
 
-.remove-one-btn {
+.decrease-btn {
   color: gray;
   border: 0px;
   margin: 0px;
@@ -51,7 +51,7 @@ img {
   background-color: transparent;
 }
 
-.add-one-btn {
+.increase-btn {
   color: gray;
   border: 0px;
   margin: 0px;
