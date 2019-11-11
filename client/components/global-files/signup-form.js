@@ -1,17 +1,18 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getUserLogin} from '../../store/user'
-import {Redirect} from 'react-router-dom'
+
+const defaultState = {
+  email: '',
+  password: '',
+  firstName: '',
+  lastName: ''
+}
 
 class SignUpForm extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      email: '',
-      password: '',
-      firstName: '',
-      lastName: ''
-    }
+    this.state = defaultState
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -29,6 +30,8 @@ class SignUpForm extends React.Component {
     const firstName = this.state.firstName
     const lastName = this.state.lastName
     this.props.getUserLogin('signup', email, password, firstName, lastName)
+
+    this.setState(defaultState)
   }
 
   render() {
@@ -38,13 +41,33 @@ class SignUpForm extends React.Component {
         <h2>New around town? Welcome!</h2>
         <br />
         <label htmlFor="firstName">FIRST NAME: </label>
-        <input name="firstName" type="text" onChange={this.handleChange} />
+        <input
+          name="firstName"
+          type="text"
+          onChange={this.handleChange}
+          value={this.state.firstName}
+        />
         <label htmlFor="lastName">LAST NAME: </label>
-        <input name="lastName" type="text" onChange={this.handleChange} />
+        <input
+          name="lastName"
+          type="text"
+          onChange={this.handleChange}
+          value={this.state.lastName}
+        />
         <label htmlFor="email">EMAIL ADDRESS: </label>
-        <input name="email" type="text" onChange={this.handleChange} />
+        <input
+          name="email"
+          type="text"
+          onChange={this.handleChange}
+          value={this.state.email}
+        />
         <label htmlFor="password">PASSWORD: </label>
-        <input name="password" type="text" onChange={this.handleChange} />{' '}
+        <input
+          name="password"
+          type="text"
+          onChange={this.handleChange}
+          value={this.state.password}
+        />{' '}
         <br />
         <button
           type="button"
