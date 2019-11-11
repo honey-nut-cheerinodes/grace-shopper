@@ -28,11 +28,12 @@ class Routes extends Component {
         {this.props.isLoggedIn ? (
           <Switch>
             <Route exact path="/profile" component={userProfile} />
+            <Route path="/cart" component={Cart} />
           </Switch>
         ) : (
           ''
         )}
-        <Route exact path="/cart" component={Cart} />
+        <Route path="/cart" component={Cart} />
         <Route component={errorPage} />
       </Switch>
     )

@@ -150,6 +150,8 @@ img:hover {
   height: 150px;
   padding: 30px 0px 50px 0px;
   margin: -5px;
+  /* bottom: 0;
+  position: absolute; */
 }
 .footer-bar p {
   font-size: 14px;

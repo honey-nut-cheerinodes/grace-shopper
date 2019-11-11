@@ -1,5 +1,4 @@
 import React from 'react'
-import {Navbar, Footer} from './index'
 import {connect} from 'react-redux'
 
 class UserProfile extends React.Component {
