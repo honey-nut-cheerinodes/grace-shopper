@@ -1,6 +1,14 @@
 const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
+
+if (
+  process.env.NODE_ENV === undefined ||
+  process.env.NODE_ENV === 'development'
+) {
+  require('../secrets') // this will mutate the process.env object with your secrets.
+}
+
 const compression = require('compression')
 const session = require('express-session')
 const passport = require('passport')
@@ -10,6 +18,7 @@ const sessionStore = new SequelizeStore({db})
 const PORT = process.env.PORT || 8080
 const app = express()
 const socketio = require('socket.io')
+
 module.exports = app
 
 // This is a global Mocha hook, used for resource cleanup.
@@ -54,7 +63,7 @@ const createApp = () => {
   // session middleware with passport
   app.use(
     session({
-      secret: process.env.SESSION_SECRET || 'my best friend is Cody',
+      secret: process.env.SESSION_SECRET,
       store: sessionStore,
       resave: false,
       saveUninitialized: false
