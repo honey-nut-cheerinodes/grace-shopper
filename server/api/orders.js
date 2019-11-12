@@ -3,6 +3,8 @@ const Orders = require('../db/models/orders')
 const Product = require('../db/models/product')
 const OrderItems = require('../db/models/orderItems')
 
+router.use('/guest', require('./guest-checkout'))
+
 router.get('/', async (req, res, next) => {
   try {
     const cart = await Orders.findOne({

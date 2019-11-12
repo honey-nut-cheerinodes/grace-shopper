@@ -1,8 +1,10 @@
 import axios from 'axios'
+
 // action types
 const ADD_ITEM_SESSION = 'ADD_ITEM_SESSION'
 const GOT_ITEMS_SESSION = 'GOT_ITEMS_SESSION'
 const UPDATE_ITEM_SESSION = 'UPDATE_ITEM_SESSION'
+
 // action creators
 const addedItem = product => ({
   type: ADD_ITEM_SESSION,
@@ -17,6 +19,7 @@ const updateItem = product => ({
 })
 // THUNKS
 export const addItemGuest = product => {
+  console.log('product', product)
   return async dispatch => {
     try {
       const {data} = await axios.post(`/api/cart/guest`, product)
@@ -26,7 +29,9 @@ export const addItemGuest = product => {
     }
   }
 }
+
 export const getSessionItems = () => {
+  console.log('did we get the data?')
   return async dispatch => {
     try {
       const {data} = await axios.get(`/api/cart/guest`)
@@ -36,10 +41,12 @@ export const getSessionItems = () => {
     }
   }
 }
-export const updateSessionItem = (productId, quantity) => {
+export const updateSessionItem = (id, quantity) => {
+  console.log('hitting update thunk')
   return async dispatch => {
     try {
-      const {data} = await axios.put('/api/cart/guest', {productId, quantity})
+      const {data} = await axios.put('/api/cart/guest', {id, quantity})
+      console.log('guest updated session info ', data)
       dispatch(updateItem(data))
       return dispatch(getSessionItems())
     } catch (error) {
@@ -47,10 +54,10 @@ export const updateSessionItem = (productId, quantity) => {
     }
   }
 }
-export const removeItemGuest = productId => {
+export const removeItemGuest = id => {
   return async dispatch => {
     try {
-      await axios.delete(`/api/cart/guest`, {data: {productId: productId}})
+      await axios.delete(`/api/cart/guest`, {data: {id: id}})
       return dispatch(getSessionItems())
     } catch (error) {
       console.error(error)
