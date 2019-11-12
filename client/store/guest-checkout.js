@@ -16,7 +16,7 @@ const updateItem = product => ({
   product
 })
 // THUNKS
-export const addItem = product => {
+export const addItemGuest = product => {
   return async dispatch => {
     try {
       const {data} = await axios.post(`/api/cart/guest`, product)
@@ -47,7 +47,7 @@ export const updateSessionItem = (productId, quantity) => {
     }
   }
 }
-export const removeItem = productId => {
+export const removeItemGuest = productId => {
   return async dispatch => {
     try {
       await axios.delete(`/api/cart/guest`, {data: {productId: productId}})
