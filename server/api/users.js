@@ -2,6 +2,15 @@ const router = require('express').Router()
 const {User} = require('../db/models')
 module.exports = router
 
+// const adminsOnly = (req, res, next) => {
+//   if (!req.user.isAdmin) {
+//     const err = new Error('Not allowed!')
+//     err.status = 401
+//     return next(err)
+//   }
+//   next()
+// }
+
 router.get('/', async (req, res, next) => {
   try {
     const users = await User.findAll({
