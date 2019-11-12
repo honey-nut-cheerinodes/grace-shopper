@@ -12,7 +12,7 @@ async function seed() {
       name: 'Life Jacket with Shark Fin',
       price: 555,
       description:
-        'A while new way to doggie paddle!  Full-body water flotation support for your dog.  Vest is designed with a cute shark fin that`s flexible, but solid enough to grab onto.',
+        'A whole new way to doggie paddle!  Full-body water flotation support for your dog.  Vest is designed with a cute shark fin that`s flexible, but solid enough to grab onto.',
       imageUrl:
         'https://ak9.picdn.net/shutterstock/videos/1037370149/thumb/1.jpg?ip=x480',
       type: 'dog'
@@ -123,7 +123,7 @@ async function seed() {
         'Luxury traditional hanbok ceremonial outfit for your bunny.',
       imageUrl:
         'https://live.staticflickr.com/8519/8548033974_0b9bb28560_b.jpg',
-      type: 'cat'
+      type: 'other'
     },
     {
       name: 'Acid Washed Vest and Hat ',

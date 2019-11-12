@@ -1,9 +1,15 @@
 const Sequelize = require('sequelize')
-
-const db = new Sequelize(process.env.DATABASE_URL, {
-  // Other argument options are: new Sequelize('database', 'username', 'password', {})
-  logging: false // unless you like the logs
-  // ...and there are many other options you may want to play with
-})
-
+const pkg = require('../../package.json')
+const databaseName = pkg.name + (process.env.NODE_ENV === 'test' ? '-test' : '')
+const db = new Sequelize(
+  process.env.DATABASE_URL || `postgres://localhost:5432/${databaseName}`,
+  {
+    logging: false
+  }
+)
 module.exports = db
+// This is a global Mocha hook used for resource cleanup.
+// Otherwise, Mocha v4+ does not exit after tests.
+if (process.env.NODE_ENV === 'test') {
+  after('close database connection', () => db.close())
+}
