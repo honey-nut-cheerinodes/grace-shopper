@@ -4,6 +4,8 @@ import './cart-item.css'
 export const CartItem = props => {
   const item = props.item
 
+  // console.log('from cart-item.js file', item.orderId)
+
   return (
     <div>
       <hr />
@@ -14,7 +16,7 @@ export const CartItem = props => {
             {item.item}
             <button
               type="button"
-              onClick={() => props.removeItem(item.id)}
+              onClick={() => props.removeItem(item.id, item.orderId)}
               className="remove-item-btn"
             >
               X

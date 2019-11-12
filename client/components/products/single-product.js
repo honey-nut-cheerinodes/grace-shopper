@@ -21,9 +21,7 @@ class SingleProduct extends React.Component {
   }
 
   handleAdd() {
-    console.log(this.props)
     const product = this.props.product.product
-    // console.log('this.props.product.product: ', this.props.product.product)
     const newProduct = [
       {
         productId: product.id,
