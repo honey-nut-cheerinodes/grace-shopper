@@ -19,9 +19,14 @@ export const OrderSummary = props => {
         <p>Total</p>
         <p>${total}</p>
       </span>
-      <button type="button" onClick={props.checkout} id="checkout-btn">
+      {/* <button type="button" href="/checkout" id="checkout-btn">
         CONTINUE TO CHECKOUT
-      </button>
+      </button> */}
+      <a href="/checkout">
+        <button type="button" id="checkout-btn">
+          CONTINUE TO CHECKOUT
+        </button>
+      </a>
     </div>
   )
 }
