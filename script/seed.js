@@ -210,7 +210,9 @@ async function seed() {
       email: 'cody@email.com',
       password: '123',
       firstName: 'Cody',
-      lastName: 'ThePug'
+      lastName: 'ThePug',
+      imageUrl:
+        'https://66.media.tumblr.com/c6434ca12fe7d26aecea612f686e23f1/tumblr_pp0zcqQ2OT1r4x5j7o1_400.jpg'
     }),
     User.create({
       email: 'murphy@email.com',

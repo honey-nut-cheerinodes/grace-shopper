@@ -42,13 +42,15 @@ describe('User model', () => {
 
       beforeEach(async () => {
         cody = await User.create({
-          email: 'cody@puppybook.com',
-          password: 'bones'
+          email: 'cody@email.com',
+          password: '123',
+          firstName: 'Cody',
+          lastName: 'ThePug'
         })
       })
 
       it('returns true if the password is correct', () => {
-        expect(cody.correctPassword('bones')).to.be.equal(true)
+        expect(cody.correctPassword('123')).to.be.equal(true)
       })
 
       it('returns false if the password is incorrect', () => {
