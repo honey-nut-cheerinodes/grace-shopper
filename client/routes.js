@@ -4,7 +4,7 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {me} from './store'
 import SingleProduct from './components/products/single-product'
-import {WelcomePage, AllProducts, errorPage} from './components'
+import {WelcomePage, AllProducts, errorPage, Checkout} from './components'
 import userProfile from './components/user-profile'
 import Cart from './components/cart/cart'
 /**
@@ -27,10 +27,12 @@ class Routes extends Component {
           <Switch>
             <Route exact path="/profile" component={userProfile} />
             <Route path="/cart" component={Cart} />
+            <Route path="/checkout" component={Checkout} />
           </Switch>
         ) : (
           ''
         )}
+        <Route path="/checkout" component={Checkout} />
         <Route path="/cart" component={Cart} />
         <Route component={errorPage} />
       </Switch>
