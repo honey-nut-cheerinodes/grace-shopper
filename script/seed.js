@@ -123,7 +123,6 @@ async function seed() {
         'Luxury traditional hanbok ceremonial outfit for your bunny.',
       imageUrl:
         'https://live.staticflickr.com/8519/8548033974_0b9bb28560_b.jpg',
-      type: 'cat'
       type: 'other'
     },
     {

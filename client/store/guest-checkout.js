@@ -1,25 +1,20 @@
 import axios from 'axios'
-
 // action types
 const ADD_ITEM_SESSION = 'ADD_ITEM_SESSION'
 const GOT_ITEMS_SESSION = 'GOT_ITEMS_SESSION'
 const UPDATE_ITEM_SESSION = 'UPDATE_ITEM_SESSION'
-
 // action creators
 const addedItem = product => ({
   type: ADD_ITEM_SESSION,
   product
 })
-
 const gotSessionItems = products => {
   return {type: GOT_ITEMS_SESSION, products}
 }
-
 const updateItem = product => ({
   type: UPDATE_ITEM_SESSION,
   product
 })
-
 // THUNKS
 export const addItem = product => {
   return async dispatch => {
@@ -31,7 +26,6 @@ export const addItem = product => {
     }
   }
 }
-
 export const getSessionItems = () => {
   return async dispatch => {
     try {
@@ -42,7 +36,6 @@ export const getSessionItems = () => {
     }
   }
 }
-
 export const updateSessionItem = (productId, quantity) => {
   return async dispatch => {
     try {
@@ -54,7 +47,6 @@ export const updateSessionItem = (productId, quantity) => {
     }
   }
 }
-
 export const removeItem = productId => {
   return async dispatch => {
     try {
@@ -65,13 +57,11 @@ export const removeItem = productId => {
     }
   }
 }
-
 // initial state
 const initialState = {
   products: [],
   product: {}
 }
-
 // reducer
 const guestReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -85,5 +75,4 @@ const guestReducer = (state = initialState, action) => {
       return state
   }
 }
-
 export default guestReducer
