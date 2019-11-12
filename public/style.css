@@ -137,15 +137,15 @@ img:hover {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  height: 150px;
-  padding: 30px 0px 50px 0px;
-  margin: -5px;
-  /* bottom: 0;
-  position: absolute; */
+  height: 15 0px;
+  padding: 30px 0px 30px 0px;
+  margin: 0px;
+  margin-top: 115px;
 }
 .footer-bar p {
   font-size: 14px;
 }
+
 #footer-about {
   width: 35%;
 }
