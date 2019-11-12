@@ -18,6 +18,10 @@ class DisconnectedCart extends Component {
   componentDidMount() {
     this.props.getCart()
 
+    console.log('CODYS ACCOUNT', this.props.cart)
+    // console.log(this.props.cart)
+    // console.log(this.props.item)
+
     // ADD THIS BACK WHEN READY TO MERGE WITH GUEST CART!!!!!
     // this.props.getSessionCart()
   }

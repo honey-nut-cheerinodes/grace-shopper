@@ -34,7 +34,6 @@ router.get('/', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const itemToAdd = req.body
-
     const cart = await Orders.findOrCreate({
       where: {
         status: 'In cart',
@@ -42,44 +41,37 @@ router.post('/', async (req, res, next) => {
       }
     })
 
-    console.log('ITEMTOADD: ', itemToAdd)
+    let currentCartItem
 
-    const addNewItem = {
-      quantity: Number(itemToAdd[0].quantity),
-      productId: Number(itemToAdd[0].productId),
-      orderId: Number(cart[0].id)
-    }
+    // const addNewItem = {
+    //     quantity: Number(itemToAdd[0].quantity),
+    //     productId: Number(itemToAdd[0].productId),
+    //     orderId: Number(cart[0].id)
+    // }
 
-    const currentCartItem = await OrderItems.findOne({
+    currentCartItem = await OrderItems.findOne({
       where: {
         productId: itemToAdd[0].productId,
         orderId: cart[0].id
       }
     })
 
-    console.log('current cart item: ', currentCartItem.quantity)
     if (currentCartItem) {
       let updatedQuantity = currentCartItem.quantity + 1
       currentCartItem.update({
         quantity: updatedQuantity
       })
+    } else {
+      currentCartItem = await OrderItems.create({
+        quantity: 1,
+        productId: itemToAdd[0].productId,
+        orderId: cart[0].id
+      })
     }
-    // } else {
-    //     // console.log(addNewItem)
-    //     // OrderItems.findOrCreate({
-    //     //     where: {
-    //     //         quantity: 1,
-    //     //         productId: addNewItem.productId,
-    //     //         orderId: addNewItem.orderId
-    //     //     }
-    //     // })
-    // }
 
-    console.log('updated current cart item: ', currentCartItem.quantity)
+    const productInfo = await Product.findByPk(currentCartItem.productId)
 
-    res.json(currentCartItem)
-    // res.json(newOrderItem)
-    // res.send('hi')
+    res.json({productInfo, quantity: currentCartItem.quantity})
   } catch (error) {
     next(error)
   }
