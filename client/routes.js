@@ -27,11 +27,12 @@ class Routes extends Component {
           <Switch>
             <Route exact path="/profile" component={userProfile} />
             <Route exact path="/cart" component={Cart} />
+            <Route exact path="/checkout" component={Checkout} />
           </Switch>
         ) : (
           ''
         )}
-        <Route path="/checkout" component={Checkout} />
+        <Route exact path="/checkout" component={Checkout} />
         <Route path="/cart" component={Cart} />
         <Route component={errorPage} />
       </Switch>
