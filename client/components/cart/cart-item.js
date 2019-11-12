@@ -1,12 +1,7 @@
 import React from 'react'
 import './cart-item.css'
 export const CartItem = props => {
-  const item = props.elem
-  const increment = props.increment
-  const decrement = props.decrement
-  const removeItem = props.removeItem
-  // access this.props.cart.elem.products.item.price (elem from mapping over cart)
-  // put subtotal and total on local state or on store?
+  const item = props.item
   return (
     <div>
       <hr />
@@ -14,11 +9,11 @@ export const CartItem = props => {
         <img src={item.imageUrl} />
         <div className="item-info">
           <span className="item-info-top">
-            {item.name}
+            {item.item}
             <button
               type="button"
-              onClick={() => removeItem(item.productId)}
-              className="delete-item-btn"
+              onClick={() => props.removeItem(item.id)}
+              className="remove-item-btn"
             >
               X
             </button>
@@ -30,19 +25,20 @@ export const CartItem = props => {
             <span className="item-quantity">
               <button
                 type="button"
-                onClick={() => {
-                  if (item.quantity > 0)
-                    decrement(item.productId, item.quantity)
-                }}
-                className="remove-one-btn"
+                onClick={() =>
+                  props.decrementQuantity(item.id, item.orderId, item.quantity)
+                }
+                className="decrease-btn"
               >
                 -
               </button>
               <p>{item.quantity}</p>
               <button
                 type="button"
-                onClick={() => increment(item.productId, item.quantity)}
-                className="add-one-btn"
+                onClick={() =>
+                  props.incrementQuantity(item.id, item.orderId, item.quantity)
+                }
+                className="increase-btn"
               >
                 +
               </button>

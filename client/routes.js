@@ -26,8 +26,7 @@ class Routes extends Component {
         {this.props.isLoggedIn ? (
           <Switch>
             <Route exact path="/profile" component={userProfile} />
-            <Route path="/cart" component={Cart} />
-            <Route path="/checkout" component={Checkout} />
+            <Route exact path="/cart" component={Cart} />
           </Switch>
         ) : (
           ''

@@ -5,11 +5,30 @@ const OrderItems = db.define('orderItems', {
   quantity: {
     type: Sequelize.INTEGER,
     allowNull: false,
-    validate: {
-      notEmpty: true,
-      isNumeric: true
-    }
+    unique: false
+    // validate: {
+    //   notEmpty: true,
+    //   isNumeric: true
+    // }
   }
+  // productId: {
+  //   type: Sequelize.INTEGER,
+  //   allowNull: false,
+  //   // primaryKey: true
+  //   // validate: {
+  //   //   notEmpty: true,
+  //   //   isNumeric: true
+  //   // }
+  // },
+  // orderId: {
+  //   type: Sequelize.INTEGER,
+  //   allowNull: false,
+  //   // primaryKey: true
+  //   // validate: {
+  //   //   notEmpty: true,
+  //   //   isNumeric: true
+  //   // }
+  // }
 })
 
 module.exports = OrderItems

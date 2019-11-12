@@ -162,16 +162,20 @@ async function seed() {
 
   const orders = [
     {
-      status: 'Ordered'
+      status: 'Ordered',
+      userId: 1
     },
     {
-      status: 'Fulfilled'
+      status: 'Fulfilled',
+      userId: 1
     },
     {
-      status: 'In cart'
+      status: 'In cart',
+      userId: 2
     },
     {
-      status: 'In cart'
+      status: 'In cart',
+      userId: 2
     }
   ]
 
