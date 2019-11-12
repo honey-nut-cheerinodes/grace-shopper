@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getSingleProduct} from '../../store/product'
-import {addItem} from '../../store/guest-checkout'
+import {addItemGuest} from '../../store/guest-checkout'
+import {addItem} from '../../store/cart'
 
 //Class component for single product
 import './single-product.css'
@@ -20,6 +21,9 @@ class SingleProduct extends React.Component {
   }
 
   handleAdd() {
+    console.log(this.props.isLoggedIn)
+
+    // console.log('HANDLE', this.props)
     const product = this.props.product.product
     const newProduct = [
       {
@@ -27,10 +31,14 @@ class SingleProduct extends React.Component {
         item: product.name,
         imageUrl: product.imageUrl,
         price: product.price,
-        quantity: 1
+        quantity: 1,
+        userId: product.userId
       }
     ]
-    this.props.addItem(newProduct)
+
+    this.props.isLoggedIn
+      ? this.props.addItem(newProduct)
+      : this.props.addItemGuest(newProduct)
   }
 
   render() {
@@ -61,13 +69,19 @@ class SingleProduct extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-  product: state.product
-})
+const mapStateToProps = state => {
+  return {
+    isLoggedIn: !!state.user.id,
+    product: state.product,
+    item: state.cartReducer.item,
+    guestItem: state.guestCheckout.product
+  }
+}
 
 const mapDispatchToProps = dispatch => ({
   getSingleProduct: id => dispatch(getSingleProduct(id)),
-  addItem: product => dispatch(addItem(product))
+  addItem: product => dispatch(addItem(product)),
+  addItemGuest: product => dispatch(addItemGuest(product))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleProduct)

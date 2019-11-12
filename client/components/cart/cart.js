@@ -3,86 +3,98 @@ import {Link} from 'react-router-dom'
 import {CartItem} from './cart-item'
 import {OrderSummary} from './order-summary'
 import {connect} from 'react-redux'
-import {getCart} from '../../store/cart'
-import {getSessionItems} from '../../store/guest-checkout'
+import {getCart, updateItem, removeItem} from '../../store/cart'
+import {
+  getSessionItems,
+  updateSessionItem,
+  removeItemGuest
+} from '../../store/guest-checkout'
 import './cart.css'
 
 class DisconnectedCart extends Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.addOne = this.addOne.bind(this)
-  //   this.removeOne = this.removeOne.bind(this)
-  //   this.deleteItem = this.deleteItem.bind(this)
-  //   this.checkout = this.checkout.bind(this)
-  // }
-
+  constructor(props) {
+    super(props)
+    this.incrementQuantity = this.incrementQuantity.bind(this)
+    this.decrementQuantity = this.decrementQuantity.bind(this)
+    this.removeItem = this.removeItem.bind(this)
+  }
   componentDidMount() {
-    this.props.getCart()
-    this.props.getSessionCart()
+    this.props.isLoggedIn ? this.props.getCart() : this.props.getSessionItems()
   }
 
-  // addOne() {
-  //
-  // }
+  incrementQuantity(id, quantity, orderId) {
+    console.log('its coming here!')
+    quantity = Number(quantity) + 1
 
-  // removeOne() {
+    if (this.props.isLoggedIn) this.props.updateItem(id, quantity, orderId)
+    else this.props.updateSessionItem(id, quantity)
+  }
 
-  // }
+  decrementQuantity(id, quantity, orderId) {
+    quantity -= 1
 
-  // deleteItem() {
+    if (this.props.isLoggedIn) this.props.updateItem(id, quantity, orderId)
+    else this.props.updateSessionItem(id, quantity)
+  }
 
-  // }
-
-  // checkout() {
-
-  // }
+  removeItem(productId, orderId) {
+    if (this.props.isLoggedIn) this.props.removeItem(productId, orderId)
+    else this.props.removeItemGuest(productId)
+  }
 
   render() {
-    // Seeing if someone has information in their cart, if so THAT takes priority. If not, check if they have session cart information, if so serve that. If nothing, serve an empty cart
     let cart
-
-    // THIS IS FOR CHECKING IF THERE'S A USER CART OR A GUEST SESSION CART,
-    // COMMENTED FOR NOW TO FORCE THE SESSION CART
-    // if (this.props.cart.length > 0) {
-    //   cart = this.props.cart
-    // } else if (this.props.sessionCart.length > 0) {
-    cart = this.props.sessionCart
-    // }
+    let sum = 0
+    if (this.props.isLoggedIn) {
+      cart = this.props.cart
+    } else {
+      cart = this.props.sessionCart
+    }
 
     return (
       <div id="checkout-body">
         <div id="cart">
           <Link to="/">← Back to Shopping</Link>
-          {(cart || []).map(elem => {
+          {(cart || []).map((item, idx) => {
+            sum += item.price * item.quantity
             return (
               <CartItem
-                elem={elem}
-                key={elem.id}
-                addOne={this.addOne}
-                removeOne={this.removeOne}
-                deleteItem={this.deleteItem}
+                item={item}
+                key={idx}
+                loggedIn={this.props.isLoggedIn}
+                incrementQuantity={this.incrementQuantity}
+                decrementQuantity={this.decrementQuantity}
+                removeItem={this.removeItem}
               />
             )
           })}
         </div>
+        <p>{this.props.cart.name}</p>
         <div>
-          <OrderSummary checkout={this.checkout} />
+          <OrderSummary total={sum} />
         </div>
       </div>
     )
   }
 }
-
-const mapStateToProps = state => ({
-  cart: state.cartReducer.cart,
-  sessionCart: state.guestCheckout.products
-})
-
+const mapStateToProps = state => {
+  return {
+    isLoggedIn: !!state.user.id,
+    random: state.cartReducer,
+    cart: state.cartReducer.cart,
+    item: state.cartReducer.item,
+    sessionCart: state.guestCheckout.products
+  }
+}
 const mapDispatchToProps = dispatch => ({
   getCart: () => dispatch(getCart()),
-  getSessionCart: () => dispatch(getSessionItems())
+  getSessionItems: () => dispatch(getSessionItems()),
+  updateItem: (id, quantity, orderId) =>
+    dispatch(updateItem(id, quantity, orderId)),
+  updateSessionItem: (id, quantity) =>
+    dispatch(updateSessionItem(id, quantity)),
+  removeItem: (productId, orderId) => dispatch(removeItem(productId, orderId)),
+  removeItemGuest: productId => dispatch(removeItemGuest(productId))
 })
-
 const Cart = connect(mapStateToProps, mapDispatchToProps)(DisconnectedCart)
-
 export default Cart

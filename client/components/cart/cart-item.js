@@ -1,10 +1,12 @@
 import React from 'react'
 import './cart-item.css'
-
 export const CartItem = props => {
-  const item = props.elem
-  // access this.props.cart.elem.products.item.price (elem from mapping over cart)
-  // put subtotal and total on local state or on store?
+  const item = props.item
+
+  console.log('item property', item)
+
+  const itemID = props.loggedIn ? item.id : item.productId
+
   return (
     <div>
       <hr />
@@ -12,11 +14,11 @@ export const CartItem = props => {
         <img src={item.imageUrl} />
         <div className="item-info">
           <span className="item-info-top">
-            {item.name}
+            {item.item}
             <button
               type="button"
-              onClick={item.deleteItem}
-              className="delete-item-btn"
+              onClick={() => props.removeItem(itemID, item.orderId)}
+              className="remove-item-btn"
             >
               X
             </button>
@@ -28,24 +30,30 @@ export const CartItem = props => {
             <span className="item-quantity">
               <button
                 type="button"
-                onClick={item.removeOne}
-                className="remove-one-btn"
+                onClick={() =>
+                  props.decrementQuantity(itemID, item.quantity, item.orderId)
+                }
+                className="decrease-btn"
               >
                 -
               </button>
               <p>{item.quantity}</p>
               <button
                 type="button"
-                onClick={item.addOne}
-                className="add-one-btn"
+                onClick={() => {
+                  props.incrementQuantity(itemID, item.quantity, item.orderId)
+                }}
+                className="increase-btn"
               >
                 +
               </button>
             </span>
-            <p>${item.price}</p>
+            <p>${item.price * item.quantity}</p>
           </span>
         </div>
       </div>
     </div>
   )
 }
+
+// props.incrementQuantity(itemID, item.orderId, item.quantity)

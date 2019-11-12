@@ -162,16 +162,20 @@ async function seed() {
 
   const orders = [
     {
-      status: 'Ordered'
+      status: 'Ordered',
+      userId: 1
     },
     {
-      status: 'Fulfilled'
+      status: 'Fulfilled',
+      userId: 1
     },
     {
-      status: 'In cart'
+      status: 'In cart',
+      userId: 2
     },
     {
-      status: 'In cart'
+      status: 'In cart',
+      userId: 2
     }
   ]
 
@@ -210,7 +214,9 @@ async function seed() {
       email: 'cody@email.com',
       password: '123',
       firstName: 'Cody',
-      lastName: 'ThePug'
+      lastName: 'ThePug',
+      imageUrl:
+        'https://66.media.tumblr.com/c6434ca12fe7d26aecea612f686e23f1/tumblr_pp0zcqQ2OT1r4x5j7o1_400.jpg'
     }),
     User.create({
       email: 'murphy@email.com',

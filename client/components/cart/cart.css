@@ -8,6 +8,25 @@
   padding-top: 100px;
 }
 
+#finished-checkout-body {
+  display: flex;
+  flex-flow: column;
+  padding-top: 100px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+#order-info {
+  display: flex;
+  flex-flow: row;
+}
+
+#thanks {
+  display: flex;
+  flex-flow: column;
+  text-align: center;
+}
+
 hr {
   border-top: 0.5px lightgray;
 }

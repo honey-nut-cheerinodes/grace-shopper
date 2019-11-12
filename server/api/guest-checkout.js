@@ -66,7 +66,7 @@ router.delete('/', (req, res, next) => {
   } else {
     let cartItems = req.session.cart
     const items = cartItems.filter(function(item) {
-      if (item.productId !== itemID.productId) {
+      if (item.productId !== itemID.id) {
         return item
       }
     })
@@ -99,7 +99,7 @@ router.put('/', (req, res, next) => {
     next(error)
   } else {
     const items = cart.map(function(item) {
-      if (item.productId === itemToUpdate.productId) {
+      if (item.productId === itemToUpdate.id) {
         item.quantity = itemToUpdate.quantity
         return item
       }
