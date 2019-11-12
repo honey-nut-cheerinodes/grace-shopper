@@ -31,7 +31,11 @@ export const removedItem = productId => ({
 export const getCart = () => async dispatch => {
   try {
     const {data} = await axios.get('/api/cart')
-    dispatch(gotCart(data))
+    for (let i = 0; i < data.products.length; i++) {
+      data.products[i].quantity = data.products[i].orderItems.quantity
+      data.products[i].orderId = data.products[i].orderItems.orderId
+    }
+    dispatch(gotCart(data.products))
   } catch (error) {
     console.error(error)
   }
