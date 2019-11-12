@@ -12,7 +12,7 @@ export const Checkout = () => {
           for future reference
         </p>
       </div>
-      {/* <div id="order-info">
+      <div id="order-info">
         <table>
           <thead>
             <tr>
@@ -49,7 +49,7 @@ export const Checkout = () => {
             </tr>
           </tbody>
         </table>
-      </div> */}
+      </div>
     </div>
   )
 }
