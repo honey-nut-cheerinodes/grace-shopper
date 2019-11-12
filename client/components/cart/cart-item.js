@@ -2,6 +2,11 @@ import React from 'react'
 import './cart-item.css'
 export const CartItem = props => {
   const item = props.item
+
+  console.log('item property', item)
+
+  const itemID = props.loggedIn ? item.id : item.productId
+
   return (
     <div>
       <hr />
@@ -12,7 +17,7 @@ export const CartItem = props => {
             {item.item}
             <button
               type="button"
-              onClick={() => props.removeItem(item.id, item.orderId)}
+              onClick={() => props.removeItem(itemID, item.orderId)}
               className="remove-item-btn"
             >
               X
@@ -26,7 +31,7 @@ export const CartItem = props => {
               <button
                 type="button"
                 onClick={() =>
-                  props.decrementQuantity(item.id, item.orderId, item.quantity)
+                  props.decrementQuantity(itemID, item.quantity, item.orderId)
                 }
                 className="decrease-btn"
               >
@@ -35,9 +40,9 @@ export const CartItem = props => {
               <p>{item.quantity}</p>
               <button
                 type="button"
-                onClick={() =>
-                  props.incrementQuantity(item.id, item.orderId, item.quantity)
-                }
+                onClick={() => {
+                  props.incrementQuantity(itemID, item.quantity, item.orderId)
+                }}
                 className="increase-btn"
               >
                 +
@@ -50,3 +55,5 @@ export const CartItem = props => {
     </div>
   )
 }
+
+// props.incrementQuantity(itemID, item.orderId, item.quantity)

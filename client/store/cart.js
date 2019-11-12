@@ -52,9 +52,9 @@ export const addItem = item => async dispatch => {
   }
 }
 
-export const updateItem = (productId, orderId, quantity) => async dispatch => {
+export const updateItem = (productId, quantity, orderId) => async dispatch => {
   try {
-    const {data} = await axios.put('/api/cart', {productId, orderId, quantity})
+    const {data} = await axios.put('/api/cart', {productId, quantity, orderId})
     dispatch(updatedItem(data))
     return dispatch(getCart())
   } catch (error) {
