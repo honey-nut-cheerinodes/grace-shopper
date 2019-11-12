@@ -2,12 +2,7 @@ const path = require('path')
 const express = require('express')
 const morgan = require('morgan')
 
-if (
-  process.env.NODE_ENV === undefined ||
-  process.env.NODE_ENV === 'development'
-) {
-  require('../secrets') // this will mutate the process.env object with your secrets.
-}
+if (process.env.NODE_ENV !== 'production') require('../secrets')
 
 const compression = require('compression')
 const session = require('express-session')
@@ -35,7 +30,6 @@ if (process.env.NODE_ENV === 'test') {
  * keys as environment variables, so that they can still be read by the
  * Node process on process.env
  */
-if (process.env.NODE_ENV !== 'production') require('../secrets')
 
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id))
