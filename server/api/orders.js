@@ -30,6 +30,40 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.post('/', async (req, res, next) => {
+  try {
+    const itemToAdd = req.body
+    const cart = await Orders.findOrCreate({
+      where: {
+        status: 'In cart',
+        userId: req.user.id
+      }
+    })
+    let currentCartItem = await OrderItems.findOne({
+      where: {
+        productId: itemToAdd[0].productId,
+        orderId: cart[0].id
+      }
+    })
+    if (currentCartItem) {
+      let updatedQuantity = currentCartItem.quantity + 1
+      currentCartItem.update({
+        quantity: updatedQuantity
+      })
+    } else {
+      currentCartItem = await OrderItems.create({
+        quantity: 1,
+        productId: itemToAdd[0].productId,
+        orderId: cart[0].id
+      })
+    }
+    const productInfo = await Product.findByPk(currentCartItem.productId)
+    res.json({productInfo, quantity: currentCartItem.quantity})
+  } catch (error) {
+    next(error)
+  }
+})
+
 router.put('/', async (req, res, next) => {
   try {
     const itemToUpdate = req.body
