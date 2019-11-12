@@ -3,8 +3,7 @@ import axios from 'axios'
 // action types
 const GOT_CART = 'GOT_CART'
 const ADDED_ITEM = 'ADDED_ITEM'
-const INCREASED = 'INCREASED'
-const DECREASED = 'DECREASED'
+const UPDATED_ITEM = 'UPDATED_ITEM'
 const REMOVED_ITEM = 'REMOVED_ITEM'
 
 // action creators
@@ -18,55 +17,56 @@ export const addedItem = item => ({
   item
 })
 
-export const increased = item => ({
-  type: INCREASED,
+export const updatedItem = item => ({
+  type: UPDATED_ITEM,
   item
 })
 
-export const decreased = item => ({
-  type: DECREASED,
-  item
-})
-
-export const removedItem = item => ({
+export const removedItem = productId => ({
   type: REMOVED_ITEM,
-  item
+  productId
 })
 
 // thunk creators and thunks
 export const getCart = () => async dispatch => {
-  const {data} = await axios.get('/api/cart')
-  let prods = []
-  data.forEach(item => {
-    prods.push(item.products[0])
-  })
-  dispatch(gotCart(prods))
+  try {
+    const {data} = await axios.get('/api/cart')
+    let prods = []
+    for (let i = 0; i < data.length; i++) {
+      prods.push(data[i].products[0])
+    }
+    dispatch(gotCart(prods))
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 export const addItem = item => async dispatch => {
-  const {data} = await axios.post('/api/cart', item)
-  dispatch(addedItem(data))
-}
-
-export const increase = item => async dispatch => {
-  item.quantity++
-  const {data} = await axios.put('/api/cart', item)
-  dispatch(increased(data))
-}
-
-export const decrease = item => async dispatch => {
-  item.quantity--
-  if (item.quantity === 0) {
-    await axios.delete('/api/cart', item)
-    dispatch(removedItem(item))
+  try {
+    const {data} = await axios.post('/api/cart', item)
+    dispatch(addedItem(data))
+  } catch (error) {
+    console.error(error)
   }
-  const {data} = await axios.put('/api/cart', item)
-  dispatch(decreased(data))
 }
 
-export const removeItem = item => async dispatch => {
-  await axios.delete('/api/cart', item)
-  dispatch(removedItem(item))
+export const updateItem = (productId, orderId, quantity) => async dispatch => {
+  try {
+    const {data} = await axios.put('/api/cart', {productId, orderId, quantity})
+    dispatch(updateItem(data))
+    return dispatch(getCart())
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const removeItem = (productId, orderId) => async dispatch => {
+  try {
+    await axios.delete('/api/cart', {data: {productId, orderId}})
+    return dispatch(gotCart())
+  } catch (error) {
+    console.error(error)
+  }
 }
 
 // initial state
@@ -82,20 +82,8 @@ const cartReducer = (state = initialState, action) => {
       return {...state, cart: action.cart}
     case ADDED_ITEM:
       return {...state, cart: [...state.cart, action.item]}
-    case INCREASED:
+    case UPDATED_ITEM:
       return {...state, cart: [...state.cart, action.item]}
-    case DECREASED:
-      return {...state, cart: [...state.cart, action.item]}
-    case REMOVED_ITEM:
-      return {
-        ...state,
-        cart: [
-          ...state.cart.filter(item => {
-            return item.id !== action.item.id
-          })
-        ]
-      }
-    // don't have to spread it again; be space-conscious. see what can be used instead of filter
     default:
       return state
   }

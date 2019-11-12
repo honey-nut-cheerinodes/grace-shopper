@@ -3,33 +3,40 @@ import {Link} from 'react-router-dom'
 import {CartItem} from './cart-item'
 import {OrderSummary} from './order-summary'
 import {connect} from 'react-redux'
-import {getCart, increase, decrease, removeItem} from '../../store/cart'
-import {getSessionItems} from '../../store/guest-checkout'
+import {getCart, updateItem, removeItem} from '../../store/cart'
+import {getSessionItems, updateSessionItem} from '../../store/guest-checkout'
 import './cart.css'
 
 class DisconnectedCart extends Component {
   constructor(props) {
     super(props)
-    this.increase = this.increase.bind(this)
-    this.decrease = this.decrease.bind(this)
+    this.incrementQuantity = this.incrementQuantity.bind(this)
+    this.decrementQuantity = this.decrementQuantity.bind(this)
     this.removeItem = this.removeItem.bind(this)
   }
 
   componentDidMount() {
     this.props.getCart()
-    this.props.getSessionCart()
+
+    // ADD THIS BACK WHEN READY TO MERGE WITH GUEST CART!!!!!
+    // this.props.getSessionCart()
   }
 
-  increase(item) {
-    this.props.increase(item)
+  incrementQuantity(id, orderId, quantity) {
+    quantity += 1
+    this.props.updateItem(id, orderId, quantity)
   }
 
-  decrease(item) {
-    this.props.decrease(item)
+  decrementQuantity(id, orderId, quantity) {
+    quantity -= 1
+    if (quantity === 0) {
+      this.props.removeItem(id)
+    }
+    this.props.updateItem(id, orderId, quantity)
   }
 
-  removeItem(item) {
-    this.props.removeItem(item)
+  removeItem(id) {
+    this.props.removeItem(id)
   }
 
   render() {
@@ -50,8 +57,8 @@ class DisconnectedCart extends Component {
               <CartItem
                 item={item}
                 key={idx}
-                increase={this.increase}
-                decrease={this.decrease}
+                incrementQuantity={this.incrementQuantity}
+                decrementQuantity={this.decrementQuantity}
                 removeItem={this.removeItem}
               />
             )
@@ -73,9 +80,11 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   getCart: () => dispatch(getCart()),
-  increase: item => dispatch(increase(item)),
-  decrease: item => dispatch(decrease(item)),
-  removeItem: item => dispatch(removeItem(item)),
+  updateItem: (id, orderId, quantity) =>
+    dispatch(updateItem(id, orderId, quantity)),
+  updateSessionItem: (id, quantity) =>
+    dispatch(updateSessionItem(id, quantity)),
+  removeItem: id => dispatch(removeItem(id)),
   getSessionCart: () => dispatch(getSessionItems())
 })
 

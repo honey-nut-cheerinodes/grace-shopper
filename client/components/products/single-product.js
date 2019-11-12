@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getSingleProduct} from '../../store/product'
-import {addItem} from '../../store/guest-checkout'
+// import {addItem} from '../../store/guest-checkout'
+import {addItem} from '../../store/cart'
 
 //Class component for single product
 import './single-product.css'
@@ -20,14 +21,17 @@ class SingleProduct extends React.Component {
   }
 
   handleAdd() {
+    console.log(this.props)
     const product = this.props.product.product
+    // console.log('this.props.product.product: ', this.props.product.product)
     const newProduct = [
       {
         productId: product.id,
         item: product.name,
         imageUrl: product.imageUrl,
         price: product.price,
-        quantity: 1
+        quantity: 1,
+        userId: product.userId
       }
     ]
     this.props.addItem(newProduct)
@@ -62,7 +66,8 @@ class SingleProduct extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  product: state.product
+  product: state.product,
+  item: state.cartReducer.item
 })
 
 const mapDispatchToProps = dispatch => ({

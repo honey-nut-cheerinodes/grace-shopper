@@ -3,18 +3,8 @@ const Orders = require('../db/models/orders')
 const Product = require('../db/models/product')
 const OrderItems = require('../db/models/orderItems')
 
-const isLoggedIn = (req, res, next) => {
-  //   try {
-  //     if (req.user) next()
-  //     // res.status(403).send('We coudn\'t find your account. Try logging in again.')
-  //   } catch (error) {
-  //     next(error)
-  //   }
-  next()
-}
-
-router.get('/', isLoggedIn, async (req, res, next) => {
-  console.log('req.session: ', req.session)
+router.get('/', async (req, res, next) => {
+  //   const userId = 2; // figure out how to access userId
   try {
     const cart = await Orders.findOne({
       include: [
@@ -41,108 +31,95 @@ router.get('/', isLoggedIn, async (req, res, next) => {
   }
 })
 
-router.post('/', isLoggedIn, async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     const itemToAdd = req.body
-    const cart = await Orders.findOne({
+
+    const cart = await Orders.findOrCreate({
       where: {
         status: 'In cart',
         userId: req.user.id
       }
     })
-    if (!cart) {
-      const newCart = await Orders.create({
-        where: {
-          status: 'In cart',
-          userId: req.user.id
-        }
-      })
-      await newCart.save()
-      const newCartItem = await OrderItems.create(itemToAdd)
-      newCartItem.orderId = newCart.id
-      await newCartItem.save(error => {
-        if (error) {
-          console.error(error)
-        }
-        res.json(newCartItem)
+
+    console.log('ITEMTOADD: ', itemToAdd)
+
+    const addNewItem = {
+      quantity: Number(itemToAdd[0].quantity),
+      productId: Number(itemToAdd[0].productId),
+      orderId: Number(cart[0].id)
+    }
+
+    const currentCartItem = await OrderItems.findOne({
+      where: {
+        productId: itemToAdd[0].productId,
+        orderId: cart[0].id
+      }
+    })
+
+    console.log('current cart item: ', currentCartItem.quantity)
+    if (currentCartItem) {
+      let updatedQuantity = currentCartItem.quantity + 1
+      currentCartItem.update({
+        quantity: updatedQuantity
       })
     }
-    const currentCartItem = await OrderItems.create(itemToAdd)
-    currentCartItem.orderId = cart.id
-    await currentCartItem.save(error => {
-      if (error) {
-        console.error(error)
-      }
-      res.json(currentCartItem)
-    })
+    // } else {
+    //     // console.log(addNewItem)
+    //     // OrderItems.findOrCreate({
+    //     //     where: {
+    //     //         quantity: 1,
+    //     //         productId: addNewItem.productId,
+    //     //         orderId: addNewItem.orderId
+    //     //     }
+    //     // })
+    // }
+
+    console.log('updated current cart item: ', currentCartItem.quantity)
+
+    res.json(currentCartItem)
+    // res.json(newOrderItem)
+    // res.send('hi')
   } catch (error) {
     next(error)
   }
 })
 
-router.put('/', isLoggedIn, async (req, res, next) => {
+router.put('/', async (req, res, next) => {
   try {
     const itemToUpdate = req.body
     const item = await OrderItems.findOne({
       where: {
-        productId: itemToUpdate.id
-      },
-      include: [
-        {
-          model: Orders,
-          where: {
-            status: 'In cart',
-            userId: req.user.id
-          }
-        }
-      ]
+        productId: itemToUpdate.productId,
+        orderId: itemToUpdate.orderId
+      }
     })
     if (!item) {
       let error = new Error("We couldn't find this item in your cart.")
       next(error)
     }
-    const updatedItem = await item.update(itemToUpdate)
-    await updatedItem.save(error => {
-      if (error) {
-        console.error(error)
-      }
-      res.json(updatedItem)
-    })
+    const updatedItem = await item.update(itemToUpdate.quantity)
+    res.json(updatedItem)
   } catch (error) {
     next(error)
   }
 })
 
-// only pass back quantity to the frontend for security purposes
-
-router.delete('/', isLoggedIn, async (req, res, next) => {
+router.delete('/', async (req, res, next) => {
   try {
     const itemToDelete = req.body
-    const item = await OrderItems.findOne({
-      include: [
-        {
-          model: Orders,
-          where: {
-            status: 'In cart',
-            userId: req.user.id
-          },
-          attributes: ['status', 'userId']
-        }
-      ],
+    await OrderItems.destroy({
       where: {
-        productId: itemToDelete.id
+        productId: itemToDelete.data.productId,
+        orderId: itemToDelete.data.orderId
       }
     })
-    if (!item) {
-      let error = new Error("We couldn't find this item in your cart.")
-      next(error)
-    }
-    await item.destroy()
+    res.sendStatus(200)
   } catch (error) {
     next(error)
   }
 })
 
-router.use('*', require('./guest-checkout'))
+// router.use('*', require('./guest-checkout'))
 
 module.exports = router

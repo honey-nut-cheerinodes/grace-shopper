@@ -14,7 +14,7 @@ export const CartItem = props => {
             {item.item}
             <button
               type="button"
-              onClick={() => props.removeItem(item)}
+              onClick={() => props.removeItem(item.id)}
               className="remove-item-btn"
             >
               X
@@ -27,7 +27,9 @@ export const CartItem = props => {
             <span className="item-quantity">
               <button
                 type="button"
-                onClick={() => props.decrease(item)}
+                onClick={() =>
+                  props.decrementQuantity(item.id, item.orderId, item.quantity)
+                }
                 className="decrease-btn"
               >
                 -
@@ -35,13 +37,15 @@ export const CartItem = props => {
               <p>{item.quantity}</p>
               <button
                 type="button"
-                onClick={() => props.increase(item)}
+                onClick={() =>
+                  props.incrementQuantity(item.id, item.orderId, item.quantity)
+                }
                 className="increase-btn"
               >
                 +
               </button>
             </span>
-            <p>${item.price}</p>
+            <p>${item.price * item.quantity}</p>
           </span>
         </div>
       </div>
