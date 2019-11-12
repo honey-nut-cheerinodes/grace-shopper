@@ -1,9 +1,7 @@
 import React from 'react'
 import './order-summary.css'
-
 export const OrderSummary = props => {
   const total = props.total
-
   return (
     <div id="order-sum">
       <span className="order-sum-heading">
@@ -21,7 +19,6 @@ export const OrderSummary = props => {
         <p>Total</p>
         <p>${total}</p>
       </span>
-
       <button type="button" onClick={props.checkout} id="checkout-btn">
         CONTINUE TO CHECKOUT
       </button>

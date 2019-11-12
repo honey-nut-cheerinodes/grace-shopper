@@ -1,13 +1,10 @@
 import React from 'react'
 import './cart-item.css'
-
 export const CartItem = props => {
   const item = props.elem
-
   const increment = props.increment
   const decrement = props.decrement
   const removeItem = props.removeItem
-  
   // access this.props.cart.elem.products.item.price (elem from mapping over cart)
   // put subtotal and total on local state or on store?
   return (
@@ -21,7 +18,6 @@ export const CartItem = props => {
             <button
               type="button"
               onClick={() => removeItem(item.productId)}
-              onClick={item.deleteItem}
               className="delete-item-btn"
             >
               X
@@ -38,7 +34,6 @@ export const CartItem = props => {
                   if (item.quantity > 0)
                     decrement(item.productId, item.quantity)
                 }}
-                onClick={item.removeOne}
                 className="remove-one-btn"
               >
                 -
@@ -47,14 +42,12 @@ export const CartItem = props => {
               <button
                 type="button"
                 onClick={() => increment(item.productId, item.quantity)}
-                onClick={item.addOne}
                 className="add-one-btn"
               >
                 +
               </button>
             </span>
             <p>${item.price * item.quantity}</p>
-            <p>${item.price}</p>
           </span>
         </div>
       </div>
