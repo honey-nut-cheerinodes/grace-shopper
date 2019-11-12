@@ -4,10 +4,9 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import {me} from './store'
 import SingleProduct from './components/products/single-product'
-import {WelcomePage, AllProducts, errorPage} from './components'
+import {WelcomePage, AllProducts, errorPage, Checkout} from './components'
 import userProfile from './components/user-profile'
 import Cart from './components/cart/cart'
-
 /**
  * COMPONENT
  */
@@ -15,7 +14,6 @@ class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData()
   }
-
   render() {
     return (
       <Switch>
@@ -29,17 +27,18 @@ class Routes extends Component {
           <Switch>
             <Route exact path="/profile" component={userProfile} />
             <Route exact path="/cart" component={Cart} />
+            <Route exact path="/checkout" component={Checkout} />
           </Switch>
         ) : (
           ''
         )}
-        <Route exact path="/cart" component={Cart} />
+        <Route exact path="/checkout" component={Checkout} />
+        <Route path="/cart" component={Cart} />
         <Route component={errorPage} />
       </Switch>
     )
   }
 }
-
 /**
  * CONTAINER
  */
@@ -50,7 +49,6 @@ const mapState = state => {
     isLoggedIn: !!state.user.id
   }
 }
-
 const mapDispatch = dispatch => {
   return {
     loadInitialData() {
@@ -58,11 +56,9 @@ const mapDispatch = dispatch => {
     }
   }
 }
-
-// The `withRouter` wrapper makes sure that updates are not blocked
+// The withRouter wrapper makes sure that updates are not blocked
 // when the url changes
 export default withRouter(connect(mapState, mapDispatch)(Routes))
-
 /**
  * PROP TYPES
  */

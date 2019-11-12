@@ -6,7 +6,6 @@ import {connect} from 'react-redux'
 import {getCart, updateItem, removeItem} from '../../store/cart'
 import {getSessionItems, updateSessionItem} from '../../store/guest-checkout'
 import './cart.css'
-
 class DisconnectedCart extends Component {
   constructor(props) {
     super(props)
@@ -14,7 +13,6 @@ class DisconnectedCart extends Component {
     this.decrementQuantity = this.decrementQuantity.bind(this)
     this.removeItem = this.removeItem.bind(this)
   }
-
   componentDidMount() {
     this.props.getCart()
 
@@ -50,7 +48,6 @@ class DisconnectedCart extends Component {
     } else if (this.props.sessionCart.length > 0) {
       cart = this.props.sessionCart
     }
-
     return (
       <div id="checkout-body">
         <div id="cart">
@@ -77,14 +74,12 @@ class DisconnectedCart extends Component {
     )
   }
 }
-
 const mapStateToProps = state => ({
   random: state.cartReducer,
   cart: state.cartReducer.cart,
   item: state.cartReducer.item,
   sessionCart: state.guestCheckout.products
 })
-
 const mapDispatchToProps = dispatch => ({
   getCart: () => dispatch(getCart()),
   updateItem: (id, orderId, quantity) =>
@@ -94,7 +89,5 @@ const mapDispatchToProps = dispatch => ({
   removeItem: (productId, orderId) => dispatch(removeItem(productId, orderId)),
   getSessionCart: () => dispatch(getSessionItems())
 })
-
 const Cart = connect(mapStateToProps, mapDispatchToProps)(DisconnectedCart)
-
 export default Cart

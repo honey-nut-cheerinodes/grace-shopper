@@ -1,7 +1,5 @@
 import React from 'react'
-import {Navbar, Footer} from './index'
 import {connect} from 'react-redux'
-
 class UserProfile extends React.Component {
   constructor() {
     super()
@@ -9,22 +7,18 @@ class UserProfile extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.showForm = this.showForm.bind(this)
   }
-
   handleChange(event) {
     const changeInput = event.target.name
     const input = event.target.value
     this.setState({[changeInput]: input})
   }
-
   handleSubmit(event) {
     event.preventDefault()
     // NEED TO ADD FUNCTION STUFF HERE!
   }
-
   showForm = () => {
     let hideLogin = document.getElementById('login-form')
     let hideSignup = document.getElementById('signup-form')
-
     if (
       hideLogin.style.display === 'block' ||
       hideSignup.style.display === 'block'
@@ -33,7 +27,6 @@ class UserProfile extends React.Component {
       hideSignup.style.display = 'none'
     }
   }
-
   render() {
     return (
       <div>
@@ -42,7 +35,6 @@ class UserProfile extends React.Component {
             <h1>Welcome, {this.props.firstName}!</h1> <p />
             <img src={this.props.imageUrl} />
           </div>
-
           <form className="update-profile">
             <h2> Edit profile information</h2>
             <label htmlFor="firstName">First name:</label>
@@ -52,7 +44,6 @@ class UserProfile extends React.Component {
               onChange={this.handleChange}
               placeholder={this.props.firstName}
             />
-
             <label htmlFor="lastName">Last name:</label>
             <input
               name="lastName"
@@ -60,7 +51,6 @@ class UserProfile extends React.Component {
               onChange={this.handleChange}
               placeholder={this.props.lastName}
             />
-
             <label htmlFor="email">Email:</label>
             <input
               name="email"
@@ -68,7 +58,6 @@ class UserProfile extends React.Component {
               onChange={this.handleChange}
               placeholder={this.props.email}
             />
-
             <label htmlFor="password">Password:</label>
             <input
               name="password"
@@ -76,7 +65,6 @@ class UserProfile extends React.Component {
               onChange={this.handleChange}
               placeholder="Enter updated password"
             />
-
             <button type="button" className="submit-btn">
               UPDATE INFO
             </button>
@@ -86,12 +74,10 @@ class UserProfile extends React.Component {
     )
   }
 }
-
 const mapStateToProps = state => ({
   firstName: state.user.firstName,
   lastName: state.user.lastName,
   email: state.user.email,
   imageUrl: state.user.imageUrl
 })
-
 export default connect(mapStateToProps)(UserProfile)

@@ -1,11 +1,7 @@
 import React from 'react'
 import './cart-item.css'
-
 export const CartItem = props => {
   const item = props.item
-
-  // console.log('from cart-item.js file', item.orderId)
-
   return (
     <div>
       <hr />
