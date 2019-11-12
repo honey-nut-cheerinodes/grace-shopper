@@ -31,11 +31,7 @@ export const removedItem = productId => ({
 export const getCart = () => async dispatch => {
   try {
     const {data} = await axios.get('/api/cart')
-    let prods = []
-    for (let i = 0; i < data.length; i++) {
-      prods.push(data[i].products[0])
-    }
-    dispatch(gotCart(prods))
+    dispatch(gotCart(data))
   } catch (error) {
     console.error(error)
   }
@@ -44,8 +40,6 @@ export const getCart = () => async dispatch => {
 export const addItem = item => async dispatch => {
   try {
     const {data} = await axios.post('/api/cart', item)
-    // productinfo: {productinfo}, quantity: quantity
-    console.log('is this from the front?', data)
     dispatch(addedItem(data))
     return dispatch(getCart())
   } catch (error) {
@@ -56,7 +50,7 @@ export const addItem = item => async dispatch => {
 export const updateItem = (productId, orderId, quantity) => async dispatch => {
   try {
     const {data} = await axios.put('/api/cart', {productId, orderId, quantity})
-    dispatch(updateItem(data))
+    dispatch(updatedItem(data))
     return dispatch(getCart())
   } catch (error) {
     console.error(error)
@@ -86,13 +80,7 @@ const cartReducer = (state = initialState, action) => {
     case ADDED_ITEM:
       let newItem = action.item.productInfo
       newItem.quantity = action.item.quantity
-      // console.log('NEW ITEM?????', newItem)
-      // console.log('is it empty?', state.cart)
-      // return {...state, cart: [...state.cart, newItem]}
-
-      let hello = {...state, cart: [...state.cart, newItem]}
-      // console.log(hello)
-      return hello
+      return {...state, cart: [...state.cart, newItem]}
     case UPDATED_ITEM:
       return {...state, cart: [...state.cart, action.item]}
     default:

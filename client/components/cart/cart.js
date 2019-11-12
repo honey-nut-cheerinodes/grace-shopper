@@ -16,16 +16,13 @@ class DisconnectedCart extends Component {
   componentDidMount() {
     this.props.getCart()
 
-    console.log('CODYS ACCOUNT', this.props.cart)
-    // console.log(this.props.cart)
-    // console.log(this.props.item)
-
     // ADD THIS BACK WHEN READY TO MERGE WITH GUEST CART!!!!!
     // this.props.getSessionCart()
   }
 
   incrementQuantity(id, orderId, quantity) {
-    quantity += 1
+    quantity = Number(quantity) + 1
+    // console.log('is it hitting this func?')
     this.props.updateItem(id, orderId, quantity)
   }
 
@@ -37,12 +34,14 @@ class DisconnectedCart extends Component {
     this.props.updateItem(id, orderId, quantity)
   }
 
-  removeItem(id) {
-    this.props.removeItem(id)
+  removeItem(productId, orderId) {
+    this.props.removeItem(productId, orderId)
   }
 
   render() {
     let cart
+
+    let sum = 0
 
     if (this.props.cart.length > 0) {
       cart = this.props.cart
@@ -54,6 +53,8 @@ class DisconnectedCart extends Component {
         <div id="cart">
           <Link to="/">← Back to Shopping</Link>
           {(cart || []).map((item, idx) => {
+            sum += item.price * item.quantity
+
             return (
               <CartItem
                 item={item}
@@ -65,14 +66,16 @@ class DisconnectedCart extends Component {
             )
           })}
         </div>
+        <p>{this.props.cart.name}</p>
         <div>
-          <OrderSummary />
+          <OrderSummary total={sum} />
         </div>
       </div>
     )
   }
 }
 const mapStateToProps = state => ({
+  random: state.cartReducer,
   cart: state.cartReducer.cart,
   item: state.cartReducer.item,
   sessionCart: state.guestCheckout.products
@@ -83,7 +86,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(updateItem(id, orderId, quantity)),
   updateSessionItem: (id, quantity) =>
     dispatch(updateSessionItem(id, quantity)),
-  removeItem: id => dispatch(removeItem(id)),
+  removeItem: (productId, orderId) => dispatch(removeItem(productId, orderId)),
   getSessionCart: () => dispatch(getSessionItems())
 })
 const Cart = connect(mapStateToProps, mapDispatchToProps)(DisconnectedCart)
