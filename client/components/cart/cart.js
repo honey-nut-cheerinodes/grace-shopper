@@ -9,6 +9,7 @@ import {
   updateSessionItem,
   removeItem
 } from '../../store/guest-checkout'
+import {getSessionItems} from '../../store/guest-checkout'
 import './cart.css'
 
 class DisconnectedCart extends Component {
@@ -44,13 +45,23 @@ class DisconnectedCart extends Component {
 
     console.log(cart)
 
+  render() {
+    // Seeing if someone has information in their cart, if so THAT takes priority. If not, check if they have session cart information, if so serve that. If nothing, serve an empty cart
+    let cart
+
+    // THIS IS FOR CHECKING IF THERE'S A USER CART OR A GUEST SESSION CART,
+    // COMMENTED FOR NOW TO FORCE THE SESSION CART
+    // if (this.props.cart.length > 0) {
+    //   cart = this.props.cart
+    // } else if (this.props.sessionCart.length > 0) {
+    cart = this.props.sessionCart
+    // }
     return (
       <div id="checkout-body">
         <div id="cart">
           <Link to="/">← Back to Shopping</Link>
           {(cart || []).map(elem => {
             sum += elem.price * elem.quantity
-
             return (
               <CartItem
                 elem={elem}
@@ -84,6 +95,7 @@ const mapDispatchToProps = dispatch => ({
   updateSessionItem: (productId, quantity) =>
     dispatch(updateSessionItem(productId, quantity)),
   removeItem: productId => dispatch(removeItem(productId))
+  getSessionCart: () => dispatch(getSessionItems())
 })
 
 const Cart = connect(mapStateToProps, mapDispatchToProps)(DisconnectedCart)
