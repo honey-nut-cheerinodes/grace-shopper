@@ -12,7 +12,7 @@ export const CartItem = props => {
             {item.item}
             <button
               type="button"
-              onClick={() => props.removeItem(item.id)}
+              onClick={() => props.removeItem(item.id, item.orderId)}
               className="remove-item-btn"
             >
               X
