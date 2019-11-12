@@ -54,7 +54,6 @@ class DisconnectedCart extends Component {
           <Link to="/">← Back to Shopping</Link>
           {(cart || []).map((item, idx) => {
             sum += item.price * item.quantity
-
             return (
               <CartItem
                 item={item}
