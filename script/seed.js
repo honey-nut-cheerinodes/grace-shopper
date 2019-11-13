@@ -15,7 +15,7 @@ async function seed() {
         'A whole new way to doggie paddle!  Full-body water flotation support for your dog.  Vest is designed with a cute shark fin that`s flexible, but solid enough to grab onto.',
       imageUrl:
         'https://ak9.picdn.net/shutterstock/videos/1037370149/thumb/1.jpg?ip=x480',
-      type: 'dog'
+      type: 'dogs'
     },
     {
       name: 'Ripped Denim Jacket',
@@ -24,7 +24,7 @@ async function seed() {
         'Oversized denim jacket.  Vintage effect at collar Buttoned flap pockets on chest.  Piped pockets at front.',
       imageUrl:
         'https://cdn.shopify.com/s/files/1/0470/2117/products/squarish_2_2048x.jpg?v=1566880912',
-      type: 'dog'
+      type: 'dogs'
     },
     {
       name: 'Three Piece Suit with Tophat',
@@ -32,7 +32,7 @@ async function seed() {
       description: 'The Downton Abbey look for your gentlemanly cat.',
       imageUrl:
         'https://img6.androidappsapk.co/300/a/e/4/com.CatsWearingClothesbelbo.png',
-      type: 'cat'
+      type: 'cats'
     },
     {
       name: 'Sweatshirt',
@@ -41,7 +41,7 @@ async function seed() {
         'This Supreme hoodie is the ultimate cozy experience for your cat.  The luxurious sherpa lining takes the coziness to the next level by decking our your pooch in the softest mix of cozy sherpa and marled fleece.',
       imageUrl:
         'https://peopledotcom.files.wordpress.com/2018/04/zappa-the-cat-3.jpg',
-      type: 'cat'
+      type: 'cats'
     },
     {
       name: 'Cozy, Plush Fleece',
@@ -50,28 +50,28 @@ async function seed() {
         'Northern knit fleece-lined sweater.  Fashion meets function with this fleece.',
       imageUrl:
         'https://www.wanimo.com/img/fiche/selection_nowel/8353/500x500/1/blouson-pour-furet.jpg',
-      type: 'other'
+      type: 'others'
     },
     {
       name: 'Lion Mane Trimmed Winter Coat',
       price: 575,
       description: 'Lion mane trimmed winter coat with detachable hood.',
       imageUrl: 'http://xad.xanga.com/931f8a4602c33284550308/m227046427.jpeg',
-      type: 'cat'
+      type: 'cats'
     },
     {
       name: 'Cozy Sweater with Bell Sleeves',
       price: 650,
       description: 'Hand knit cozy sweater with bell sleeves.',
       imageUrl: 'https://luny.ru/bundles/app/img/photo/olya.png',
-      type: 'cat'
+      type: 'cats'
     },
     {
       name: 'Preppy Turtleneck Sweater',
       price: 725,
       description: 'Unbelievably soft, cashmere turtleneck sweater.',
       imageUrl: 'http://livedoor.blogimg.jp/buzzrall/imgs/c/a/cac997d1.jpg',
-      type: 'other'
+      type: 'others'
     },
     {
       name: 'Oversized Acetate Glasses',
@@ -79,7 +79,7 @@ async function seed() {
       description: 'The Warby Parker for your woofie.',
       imageUrl:
         'https://image.freepik.com/free-photo/border-collie-dog-wearing-black-glasses-isolated-white-background_77749-93.jpg',
-      type: 'dog'
+      type: 'dogs'
     },
     {
       name: 'Five Carat Diamond Dog Collar',
@@ -87,7 +87,7 @@ async function seed() {
       description: 'Five carat ethically sourced diamond dog collar.',
       imageUrl:
         'https://www.puppywire.com/wp-content/uploads/2017/05/la-jeune-tulipe-dog-collar.jpg',
-      type: 'dog'
+      type: 'dogs'
     },
     {
       name: 'Couture Royal Harness Dress',
@@ -96,7 +96,7 @@ async function seed() {
         'Taking your best friend to the Met gala?  This couture royal dress with adjustable harness is the look of the season.',
       imageUrl:
         'https://www.puppywire.com/wp-content/uploads/2017/05/couture-futuristic-royal-harness-dress.jpg',
-      type: 'dog'
+      type: 'dogs'
     },
     {
       name: 'Polar Vortex Vest',
@@ -105,7 +105,7 @@ async function seed() {
         'Chevron quilted exterior with 100% goose down insulation. Waterproof, size-adjustable velcro closure, with functional pockets.',
       imageUrl:
         'https://cdn.shopify.com/s/files/1/1323/0731/products/UAC0086BK91-Front_BARBOUR_LIDDESDALE_DOG_COAT_2048x2048.jpg?v=1527191069',
-      type: 'dog'
+      type: 'dogs'
     },
     {
       name: 'Fur-Trimmed Wool Blend Coat',
@@ -114,7 +114,7 @@ async function seed() {
         'Prada`s coat is unapologetically luxurious with its voluminous fur trim and darling mauve color palette. It`s been crafted in Italy from a blend wool, angora and cashgora.',
       imageUrl:
         'https://i.pinimg.com/originals/81/42/8e/81428e6fc23a0e62a128050656eb5af1.jpg',
-      type: 'cat'
+      type: 'cats'
     },
     {
       name: 'Traditional Hanbok Outfit',
@@ -123,7 +123,7 @@ async function seed() {
         'Luxury traditional hanbok ceremonial outfit for your bunny.',
       imageUrl:
         'https://live.staticflickr.com/8519/8548033974_0b9bb28560_b.jpg',
-      type: 'other'
+      type: 'others'
     },
     {
       name: 'Acid Washed Vest and Hat ',
@@ -131,14 +131,14 @@ async function seed() {
       description: 'Hip acid washed designer vest and hat.',
       imageUrl:
         'https://files.slack.com/files-pri/T024FPYBQ-FPZ3VFRRQ/image.png',
-      type: 'dog'
+      type: 'dogs'
     },
     {
       name: 'Fleece-Lined Grey hoodie',
       price: 899,
       description: 'Sherpa fleece-lined grey hoodie with zip front.',
       imageUrl: 'https://i.ebayimg.com/images/g/kbQAAOSwZGFdZq6y/s-l300.jpg',
-      type: 'dog'
+      type: 'dogs'
     },
     {
       name: 'Everest Explorer Jacket',
@@ -147,7 +147,7 @@ async function seed() {
         'The warmth of a parka combined with the flexibility of a vest.',
       imageUrl:
         'https://files.slack.com/files-pri/T024FPYBQ-FQDNMKF0X/image.png',
-      type: 'dog'
+      type: 'dogs'
     },
     {
       name: 'Down Hoodie Jacket',
@@ -156,7 +156,7 @@ async function seed() {
         'Sporty take on a classic down jacket includes toasty extras like long recessed knit cuffs and a plush, fur-trimmed hood for a look that`s both slopes-and downtown-streets-worthy.',
       imageUrl:
         'https://files.slack.com/files-pri/T024FPYBQ-FQBD3FY5S/image.png',
-      type: 'dog'
+      type: 'dogs'
     }
   ]
 
