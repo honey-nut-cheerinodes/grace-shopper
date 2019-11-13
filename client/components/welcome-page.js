@@ -26,7 +26,7 @@ const App = props => {
         <button
           type="button"
           className="shop-btn"
-          onClick={() => props.history.push('/products')}
+          onClick={() => props.history.push('/all')}
         >
           SHOP NOW
         </button>

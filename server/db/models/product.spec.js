@@ -11,8 +11,6 @@ You would write tests for [functions/lifecycle hooks], because it contains logic
 
 */
 
-// So, I'm leaving this here for now, because we will need to add test specs once/if we add functions/lifecycle hooks
-
 describe('Product model', () => {
   beforeEach(() => {
     return db.sync({force: true})

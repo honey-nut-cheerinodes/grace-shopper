@@ -11,10 +11,7 @@ class DisconnectedCheckout extends Component {
 
   render() {
     let total = 0
-    // const cart = this.props.cart[0]
-    // this logs the entire obj, incl. orderId
-    // console.log('cart: ', cart.orderId)
-    // but then it errors out here as undefined
+
     return (
       <div id="finished-checkout-body">
         <div id="thanks">
@@ -26,7 +23,6 @@ class DisconnectedCheckout extends Component {
             Check your email for your order confirmation.
           </p>
           <h3>Order Details</h3>
-          {/* <p>Your order number is 000000{this.props.cart[0]}</p> */}
           {(this.props.cart || []).map((item, idx) => {
             total += item.price * item.quantity
             return <CheckoutItem item={item} key={idx} />
