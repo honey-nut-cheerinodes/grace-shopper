@@ -30,7 +30,15 @@ router.post('/', (req, res) => {
       }
     ]
   ****************************** */
-  const items = req.body
+  let items = []
+  const newItem = {
+    productId: req.body[0].productId,
+    item: req.body[0].item,
+    imageUrl: req.body[0].imageUrl,
+    price: req.body[0].price,
+    quantity: req.body[0].quantity
+  }
+  items.push(newItem)
   const cart = req.session.cart
   if (!cart) {
     req.session.cart = [...items]
