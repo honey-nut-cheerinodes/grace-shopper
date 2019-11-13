@@ -35,7 +35,6 @@ export const getCart = () => async dispatch => {
       data.products[i].quantity = data.products[i].orderItems.quantity
       data.products[i].orderId = data.products[i].orderItems.orderId
     }
-    console.log('data.products:', data.products)
     dispatch(gotCart(data.products))
   } catch (error) {
     console.error(error)

@@ -98,6 +98,4 @@ router.delete('/', async (req, res, next) => {
   }
 })
 
-// router.use('*', require('./guest-checkout'))
-
 module.exports = router

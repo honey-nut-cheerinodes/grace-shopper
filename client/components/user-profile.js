@@ -15,7 +15,6 @@ class UserProfile extends React.Component {
   }
   handleSubmit(event) {
     event.preventDefault()
-    // NEED TO ADD FUNCTION STUFF HERE!
   }
   showForm = () => {
     let hideLogin = document.getElementById('login-form')

@@ -21,9 +21,6 @@ class SingleProduct extends React.Component {
   }
 
   handleAdd() {
-    console.log(this.props.isLoggedIn)
-
-    // console.log('HANDLE', this.props)
     const product = this.props.product.product
     const newProduct = [
       {
