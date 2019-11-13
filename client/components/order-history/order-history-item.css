@@ -1,0 +1,29 @@
+#order-history-item {
+  display: flex;
+  /* flex-flow: column; */
+  justify-content: space-between;
+  width: 500px;
+}
+
+#item-image {
+  flex-grow: 1;
+}
+
+#item-details {
+  flex-grow: 3;
+}
+
+p {
+  text-align: left;
+}
+
+hr {
+  border-top: 0.5px lightgray;
+}
+
+#date {
+  display: flex;
+  text-align: left;
+  padding: 0px;
+  margin-top: 10px;
+}

@@ -71,7 +71,10 @@ class DisconnectedCart extends Component {
         </div>
         <p>{this.props.cart.name}</p>
         <div>
-          <OrderSummary total={sum} />
+          {/* {
+            ((this.props.cart[0] && this.props.cart[0].products) || [])
+          } */}
+          <OrderSummary total={sum} cart={cart} />
         </div>
       </div>
     )
