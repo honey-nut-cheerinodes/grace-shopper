@@ -255,3 +255,10 @@ label {
   display: flex;
   align-items: center;
 }
+
+#footer-contact a,
+#footer-contact a:active,
+#footer-contact a:visited {
+  font-size: 14px;
+  color: black;
+}
