@@ -58,3 +58,7 @@ img {
   padding: 0px 0px 0px 7px;
   background-color: transparent;
 }
+
+#item-size {
+  text-align: left;
+}
