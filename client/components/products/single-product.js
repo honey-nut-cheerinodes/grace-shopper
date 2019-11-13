@@ -43,26 +43,34 @@ class SingleProduct extends React.Component {
 
   render() {
     return (
-      <div className="single-product">
-        <div className="left-single-product">
-          <img src={this.props.product.product.imageUrl} />
-        </div>
-        <div className="right-single-product">
-          <h2>{this.props.product.product.name}</h2>
-          <h3>${this.props.product.product.price}</h3>
-          <h4 className="description">DESCRIPTION</h4>
-          <hr />
-          <h4>{this.props.product.product.description}</h4>
-          <h5>
-            <i className="far fa-star" />
-            <i className="far fa-star" />
-            <i className="far fa-star" />
-            <i className="far fa-star" />
-            <i className="far fa-star" />
-          </h5>
-          <button type="button" className="add-btn" onClick={this.handleAdd}>
-            ADD TO BAG
-          </button>
+      <div>
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
+
+        <div className="single-product">
+          <div className="left-single-product">
+            <img src={this.props.product.product.imageUrl} />
+          </div>
+          <div className="right-single-product">
+            <h2>{this.props.product.product.name}</h2>
+            <h3>${this.props.product.product.price}</h3>
+            <h4 className="description">DESCRIPTION</h4>
+            <hr />
+            <h4>{this.props.product.product.description}</h4>
+            <h5>
+              <i className="fa fa-star" />
+              <i className="fa fa-star" />
+              <i className="fa fa-star" />
+              <i className="fa fa-star" />
+              <i className="fa fa-star-half-o" />
+              <i> 4.5</i>
+            </h5>
+            <button type="button" className="add-btn" onClick={this.handleAdd}>
+              ADD TO BAG
+            </button>
+          </div>
         </div>
       </div>
     )

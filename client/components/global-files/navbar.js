@@ -69,7 +69,6 @@ class Navbar extends React.Component {
                 </Link>
               </span>
             )}
-            {/* <Link to="/cart">Cart</Link> */}
             <Link
               to="/cart"
               className="fa fa-shopping-bag"
@@ -102,7 +101,3 @@ export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
 Navbar.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired
 }
-
-// other options for shoppig bag icon
-// fa fa-shopping-cart
-// fa fa-shopping-basket

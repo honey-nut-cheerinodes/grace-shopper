@@ -53,5 +53,3 @@ export const CartItem = props => {
     </div>
   )
 }
-
-// props.incrementQuantity(itemID, item.orderId, item.quantity)

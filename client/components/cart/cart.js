@@ -33,8 +33,10 @@ class DisconnectedCart extends Component {
   decrementQuantity(id, quantity, orderId) {
     quantity -= 1
 
-    if (this.props.isLoggedIn) this.props.updateItem(id, quantity, orderId)
-    else this.props.updateSessionItem(id, quantity)
+    if (quantity > 0) {
+      if (this.props.isLoggedIn) this.props.updateItem(id, quantity, orderId)
+      else this.props.updateSessionItem(id, quantity)
+    }
   }
 
   removeItem(productId, orderId) {
