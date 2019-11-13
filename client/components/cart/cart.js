@@ -33,8 +33,10 @@ class DisconnectedCart extends Component {
   decrementQuantity(id, quantity, orderId) {
     quantity -= 1
 
-    if (this.props.isLoggedIn) this.props.updateItem(id, quantity, orderId)
-    else this.props.updateSessionItem(id, quantity)
+    if (quantity > 0) {
+      if (this.props.isLoggedIn) this.props.updateItem(id, quantity, orderId)
+      else this.props.updateSessionItem(id, quantity)
+    }
   }
 
   removeItem(productId, orderId) {
@@ -54,20 +56,29 @@ class DisconnectedCart extends Component {
     return (
       <div id="checkout-body">
         <div id="cart">
-          <Link to="/">← Back to Shopping</Link>
-          {(cart || []).map((item, idx) => {
-            sum += item.price * item.quantity
-            return (
-              <CartItem
-                item={item}
-                key={idx}
-                loggedIn={this.props.isLoggedIn}
-                incrementQuantity={this.incrementQuantity}
-                decrementQuantity={this.decrementQuantity}
-                removeItem={this.removeItem}
-              />
-            )
-          })}
+          <div className="header">
+            <Link to="/">← Back to Shopping</Link>
+          </div>
+
+          {cart.length === 0 ? (
+            <div className="empty-cart">
+              Nothing to see here. Time to get shopping!
+            </div>
+          ) : (
+            (cart || []).map((item, idx) => {
+              sum += item.price * item.quantity
+              return (
+                <CartItem
+                  item={item}
+                  key={idx}
+                  loggedIn={this.props.isLoggedIn}
+                  incrementQuantity={this.incrementQuantity}
+                  decrementQuantity={this.decrementQuantity}
+                  removeItem={this.removeItem}
+                />
+              )
+            })
+          )}
         </div>
         <p>{this.props.cart.name}</p>
         <div>

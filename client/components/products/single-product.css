@@ -25,3 +25,9 @@
   height: 500px;
   object-fit: cover;
 }
+
+.single-product i {
+  font-size: 20px;
+  padding: 5px;
+  font-style: normal;
+}
