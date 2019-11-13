@@ -23,11 +23,23 @@ router.post('/', (req, res) => {
     price: req.body[0].price,
     quantity: req.body[0].quantity
   }
-  items.push(newItem)
+
   const cart = req.session.cart
-  if (!cart) {
+  if (!cart || cart.length === 0) {
+    items.push(newItem)
+
     req.session.cart = [...items]
   } else {
+    // check to see if item already exists in cart
+    let foundDuplicate = false
+    cart.forEach(product => {
+      if (product.productId === newItem.productId) {
+        product.quantity++
+        foundDuplicate = true
+      }
+    })
+
+    if (!foundDuplicate) items.push(newItem)
     req.session.cart = [...cart, ...items]
   }
   req.session.save(err => {

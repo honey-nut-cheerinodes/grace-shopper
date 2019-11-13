@@ -19,7 +19,6 @@ const updateItem = product => ({
 })
 // THUNKS
 export const addItemGuest = product => {
-  console.log('product', product)
   return async dispatch => {
     try {
       const {data} = await axios.post(`/api/cart/guest`, product)
@@ -31,7 +30,6 @@ export const addItemGuest = product => {
 }
 
 export const getSessionItems = () => {
-  console.log('did we get the data?')
   return async dispatch => {
     try {
       const {data} = await axios.get(`/api/cart/guest`)
@@ -42,11 +40,9 @@ export const getSessionItems = () => {
   }
 }
 export const updateSessionItem = (id, quantity) => {
-  console.log('hitting update thunk')
   return async dispatch => {
     try {
       const {data} = await axios.put('/api/cart/guest', {id, quantity})
-      console.log('guest updated session info ', data)
       dispatch(updateItem(data))
       return dispatch(getSessionItems())
     } catch (error) {
