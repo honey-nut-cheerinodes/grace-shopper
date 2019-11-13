@@ -10,21 +10,7 @@ class DisconnectedAllProducts extends Component {
   }
   render() {
     //figure out which set of items the user wants to see, based on URL path
-    let type = 'all'
-    switch (this.props.match.url.slice(1)) {
-      case 'cats':
-        type = 'cat'
-        break
-      case 'dogs':
-        type = 'dog'
-        break
-      case 'others':
-        type = 'other'
-        break
-      default:
-        type = 'all'
-        break
-    }
+    let type = this.props.match.url.slice(1)
 
     const products = this.props.products.filter(product => {
       if (product.type === type || type === 'all') return product
