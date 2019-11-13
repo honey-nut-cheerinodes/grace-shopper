@@ -31,14 +31,16 @@ class DisconnectedAllProducts extends Component {
     })
 
     return (
-      <div id="all-products">
-        {products !== undefined ? (
-          products.map(product => {
-            return <SingleProductCard key={product.id} product={product} />
-          })
-        ) : (
-          <div />
-        )}
+      <div className="page-layout">
+        <div id="all-products">
+          {products !== undefined ? (
+            products.map(product => {
+              return <SingleProductCard key={product.id} product={product} />
+            })
+          ) : (
+            <div />
+          )}
+        </div>
       </div>
     )
   }
