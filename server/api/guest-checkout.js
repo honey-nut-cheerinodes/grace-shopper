@@ -15,21 +15,6 @@ router.get('/', (req, res, next) => {
 // Create a new cart, or add items to cart
 //post for guests. Not for users. This may not be necessary though, but separated out for now
 router.post('/', (req, res) => {
-  /* PLEASE READ ***********************
-    right now, the expected input type is an array of objects, for example:
-     [
-      {
-          "productId": "6",
-          "item": "dress",
-          "quantity": "1"
-      },
-      {
-          "productId": "7",
-          "item": "jacket",
-          "quantity": "1"
-      }
-    ]
-  ****************************** */
   let items = []
   const newItem = {
     productId: req.body[0].productId,
@@ -51,18 +36,10 @@ router.post('/', (req, res) => {
     }
     res.json(items)
   })
-
-  // We probably want to redirect afterwards
-  // res.redirect('/')
 })
 
 // Delete an item from the guest's cart
 router.delete('/', (req, res, next) => {
-  /* EXPECTED INPUT ***********
-    {
-      "productId": "6"
-    }
-  ************************** */
   const cart = req.session.cart
   const itemID = req.body
   if (!cart) {
@@ -90,13 +67,6 @@ router.delete('/', (req, res, next) => {
 
 // Update items on a cart
 router.put('/', (req, res, next) => {
-  /* EXPECTED INPUT ***********************
-    right now, the expected input type is an array of objects, for example:
-      {
-          "productId": "6",
-          "quantity": "1"
-      }
-  ****************************** */
   const itemToUpdate = req.body
   const cart = req.session.cart
   if (!cart) {
