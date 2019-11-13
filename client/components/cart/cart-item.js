@@ -2,10 +2,8 @@ import React from 'react'
 import './cart-item.css'
 export const CartItem = props => {
   const item = props.item
-
-  console.log('item property', item)
-
   const itemID = props.loggedIn ? item.id : item.productId
+  const itemName = props.loggedIn ? item.name : item.item
 
   return (
     <div>
@@ -14,7 +12,7 @@ export const CartItem = props => {
         <img src={item.imageUrl} />
         <div className="item-info">
           <span className="item-info-top">
-            {item.item}
+            {itemName}
             <button
               type="button"
               onClick={() => props.removeItem(itemID, item.orderId)}
