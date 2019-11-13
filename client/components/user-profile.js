@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 class UserProfile extends React.Component {
   constructor() {
     super()
@@ -33,7 +34,14 @@ class UserProfile extends React.Component {
         <div className="user-profile-body" onLoad={this.showForm}>
           <div className="user-profile-body-left">
             <h1>Welcome, {this.props.firstName}!</h1> <p />
-            <img src={this.props.imageUrl} />
+            <span id="order-history-link">
+              <img src={this.props.imageUrl} />
+            </span>
+            <br />
+            <br />
+            <p id="order-history-link">
+              <Link to="/profile/order-history">View order history</Link>
+            </p>
           </div>
           <form className="update-profile">
             <h2> Edit profile information</h2>

@@ -10,7 +10,8 @@
 
 #finished-checkout-body {
   display: flex;
-  flex-flow: column;
+  flex-flow: column 500px;
+  justify-content: space-around;
   padding-top: 100px;
   padding-left: 50px;
   padding-right: 50px;
@@ -24,6 +25,14 @@
 #thanks {
   display: flex;
   flex-flow: column;
+  text-align: center;
+}
+
+.thanks-body {
+  text-align: center;
+}
+
+#order-total {
   text-align: center;
 }
 

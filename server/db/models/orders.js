@@ -8,7 +8,7 @@ const Orders = db.define('orders', {
     defaultValue: 'In cart',
     validate: {
       notEmpty: true,
-      isIn: [['In cart', 'Ordered', 'Pending', 'Fulfilled']]
+      isIn: [['In cart', 'In process', 'Shipped', 'Fulfilled']]
     }
   }
 })

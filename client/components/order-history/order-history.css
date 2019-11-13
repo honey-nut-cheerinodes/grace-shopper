@@ -1,0 +1,21 @@
+#order-history-body {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding-top: 100px;
+}
+
+#order-history-items {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1 {
+  text-align: center;
+}
+
+h3 {
+  text-align: center;
+  padding-bottom: 15px;
+}
