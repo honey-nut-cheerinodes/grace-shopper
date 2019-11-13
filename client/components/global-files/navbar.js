@@ -44,7 +44,7 @@ class Navbar extends React.Component {
             <Link to="/dogs">Dogs</Link>
             <Link to="/cats">Cats</Link>
             <Link to="/others">Other Pets</Link>
-            <Link to="/products">All Products</Link>
+            <Link to="/all">All Products</Link>
           </div>
           <Link to="/" id="nav-logo">
             CLOAK & DOGGER

@@ -22,7 +22,7 @@ class Routes extends Component {
         <Route exact path="/cats" component={AllProducts} />
         <Route exact path="/others" component={AllProducts} />
         <Route exact path="/products/:id" component={SingleProduct} />
-        <Route exact path="/products" component={AllProducts} />
+        <Route exact path="/all" component={AllProducts} />
         {this.props.isLoggedIn ? (
           <Switch>
             <Route exact path="/profile" component={userProfile} />
