@@ -1,19 +1,8 @@
 import React from 'react'
 import './order-summary.css'
 export const OrderSummary = props => {
-  console.log('PROPSSSS: ', props.cart)
-
-  // let orderId;
-
-  // ((props.cart[0].orderId && props.cart[0].orderId) || []).map(item => {
-  //   orderId = item.orderId
-  //   return orderId
-  // })
-
-  // console.log('ORDER ID: ', orderId)
-
   const total = props.total
-  console.log('totallllllll: ', props)
+
   return (
     <div id="order-sum">
       <span className="order-sum-heading">

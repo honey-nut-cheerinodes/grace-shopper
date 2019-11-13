@@ -23,7 +23,6 @@ class DisconnectedCart extends Component {
   }
 
   incrementQuantity(id, quantity, orderId) {
-    console.log('its coming here!')
     quantity = Number(quantity) + 1
 
     if (this.props.isLoggedIn) this.props.updateItem(id, quantity, orderId)
