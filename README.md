@@ -24,3 +24,12 @@ npm run start-dev
 npm test
 
 ```
+## Screenshots
+
+![home page](https://github.com/honey-nut-cheerinodes/grace-shopper/tree/master/app-screenshots/cloak-n-dogger-1.jpeg)
+![cat products](https://github.com/honey-nut-cheerinodes/grace-shopper/tree/master/app-screenshots/cloak-n-dogger-2.jpeg)
+![cart](https://github.com/honey-nut-cheerinodes/grace-shopper/tree/master/app-screenshots/cloak-n-dogger-4.jpeg)
+![log in](https://github.com/honey-nut-cheerinodes/grace-shopper/tree/master/app-screenshots/cloak-n-dogger-5.jpeg)
+![profile page](https://github.com/honey-nut-cheerinodes/grace-shopper/tree/master/app-screenshots/cloak-n-dogger-6.jpeg)
+![order history](https://github.com/honey-nut-cheerinodes/grace-shopper/tree/master/app-screenshots/cloak-n-dogger-7.jpeg)
+![order summary](https://github.com/honey-nut-cheerinodes/grace-shopper/tree/master/app-screenshots/cloak-n-dogger-8.jpeg)
